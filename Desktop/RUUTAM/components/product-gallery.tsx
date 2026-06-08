@@ -39,7 +39,7 @@ export const ProductGallery = () => {
   if (!products.length) return null;
 
   return (
-    <section id="products" className="flex h-[100dvh] w-full flex-col bg-gradient-to-b from-[#365F37] to-[#3a5e3c]">
+    <section id="products" className="flex h-[100dvh] w-full flex-col bg-[#365F37]">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -127,6 +127,11 @@ export const ProductGallery = () => {
     </section>
   );
 };
+
+
+
+
+
 
 
 

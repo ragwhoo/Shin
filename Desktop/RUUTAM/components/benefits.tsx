@@ -21,7 +21,7 @@ export const Benefits = () => {
   if (!items.length) return null;
 
   return (
-    <section id="benefits" className="bg-gradient-to-b from-[#3a5e3c] to-[#3d6b40] px-6 py-24">
+    <section id="benefits" className="bg-[#365F37] px-6 py-24 pb-36">
       <div className="max-w-5xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -64,6 +64,11 @@ export const Benefits = () => {
     </section>
   );
 };
+
+
+
+
+
 
 
 

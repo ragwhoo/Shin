@@ -28,7 +28,7 @@ export default function Home() {
 
       <button
         onClick={() => setMenuOpen(!menuOpen)}
-        className="fixed top-6 right-6 z-[100] h-12 w-12 rounded-full bg-[#fdffee] text-[#355E3B] flex items-center justify-center text-lg font-black shadow-lg hover:scale-105 transition-transform"
+        className="fixed top-6 right-6 z-[200] h-12 w-12 rounded-full bg-[#fdffee] text-[#355E3B] flex items-center justify-center text-lg font-black shadow-lg hover:scale-105 transition-transform"
       >
         {menuOpen ? "✕" : "☰"}
       </button>
@@ -37,7 +37,7 @@ export default function Home() {
         {menuOpen && (
           <motion.div
             key="menu-overlay"
-            className="fixed inset-0 z-[90] flex items-center justify-center"
+            className="fixed inset-0 z-[150] flex items-center justify-center"
             initial={{ clipPath: "circle(0px at calc(100% - 3rem) 3rem)" }}
             animate={{ clipPath: "circle(200% at calc(100% - 3rem) 3rem)" }}
             exit={{ clipPath: "circle(0px at calc(100% - 3rem) 3rem)" }}

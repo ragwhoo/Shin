@@ -25,7 +25,7 @@ export const Contact = () => {
   const waLink = `https://wa.me/${cleanPhone.replace("+", "")}?text=Hi!%20I'm%20interested%20in%20RUTAM%20oils.`;
 
   return (
-    <section id="contact" className="bg-gradient-to-b from-[#355E3B] to-[#2d4f2f] px-6 py-24">
+    <section id="contact" className="bg-[#365F37] px-6 py-24">
       <div className="w-full text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -100,6 +100,10 @@ export const Contact = () => {
     </section>
   );
 };
+
+
+
+
 
 
 
