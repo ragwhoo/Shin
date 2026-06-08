@@ -8,7 +8,6 @@ import { Skiper58 } from "@/skiper58";
 import { About } from "@/components/about";
 import { ProductGallery } from "@/components/product-gallery";
 import { Benefits } from "@/components/benefits";
-import { Gallery } from "@/components/gallery";
 import { Contact } from "@/components/contact";
 import { SmoothScroll } from "@/components/smooth-scroll";
 
@@ -23,7 +22,6 @@ export default function Home() {
         <About />
         <ProductGallery />
         <Benefits />
-        <Gallery />
         <Contact />
        </main>
      </SmoothScroll>

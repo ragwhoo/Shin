@@ -100,7 +100,7 @@ export const About = () => {
             }`}>
               {data.subtitle}
             </p>
-            <div className="mt-10">
+            <div className="mt-10 text-justify">
               {paragraphs.map((p, i) => (
                 <motion.p
                   key={i}

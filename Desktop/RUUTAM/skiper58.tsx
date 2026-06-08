@@ -27,11 +27,6 @@ const navigationItems = [
     description: "[3]",
   },
   {
-    name: "Gallery",
-    href: "#gallery",
-    description: "[4]",
-  },
-  {
     name: "Contact",
     href: "#contact",
     description: "[5]",
@@ -61,7 +56,7 @@ export const Skiper58 = ({ onNavigate }: Skiper58Props) => {
             <div className="relative flex items-start">
               <TextRoll
                 center
-                className="text-2xl font-extrabold uppercase leading-[0.8] tracking-[-0.03em] transition-colors sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
+                className="text-[clamp(3rem,8vw,8rem)] font-black uppercase leading-[0.85] tracking-[-0.04em] transition-colors"
               >
                 {item.name}
               </TextRoll>

@@ -8,6 +8,5 @@ export const navigationItems: NavItem[] = [
   { name: "About", href: "#about" },
   { name: "Products", href: "#products" },
   { name: "Benefits", href: "#benefits" },
-  { name: "Gallery", href: "#gallery" },
   { name: "Contact", href: "#contact" },
 ];

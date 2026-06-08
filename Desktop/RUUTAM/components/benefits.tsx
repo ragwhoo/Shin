@@ -49,7 +49,6 @@ export const Benefits = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              whileHover={{ y: -6, scale: 1.02 }}
               className="rounded-xl bg-[#365F37] p-6 border border-transparent hover:bg-[#fdffee] hover:border-[#355E3B]/20 transition-all duration-300 cursor-default group"
             >
               <h3 className="mb-2 text-base font-semibold text-[#fdffee] group-hover:text-[#355E3B] transition-colors duration-300">
