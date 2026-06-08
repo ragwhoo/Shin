@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { CoconutSplit } from "./coconut-split";
 
 interface AboutData {
   subtitle: string;
@@ -33,13 +34,13 @@ export const About = () => {
           transition={{ duration: 0.5 }}
           className="mb-20 text-center"
         >
-          <span className="mb-3 block text-xs font-medium tracking-[0.25em] uppercase text-[#fdffee]/70/70">
+          <span className="mb-3 block text-xs font-medium tracking-[0.25em] uppercase text-[#fdffee]/70">
             Our Story
           </span>
           <h2 className="text-[clamp(3.5rem,10vw,10rem)] font-black leading-[0.85] tracking-[-0.04em] text-[#fdffee]">
             About
           </h2>
-          <p className="mt-6 mx-auto max-w-2xl text-sm tracking-[0.15em] uppercase text-[#fdffee]/70/70">
+          <p className="mt-6 mx-auto max-w-2xl text-sm tracking-[0.15em] uppercase text-[#fdffee]/70">
             {data.subtitle}
           </p>
         </motion.div>
@@ -57,6 +58,10 @@ export const About = () => {
               </p>
             ))}
           </motion.div>
+        </div>
+
+        <div className="mt-12 flex justify-center relative z-30">
+          <CoconutSplit />
         </div>
       </div>
     </section>
