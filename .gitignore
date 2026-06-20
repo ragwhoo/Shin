@@ -1,0 +1,21 @@
+﻿# Ignore everything except Desktop/SHIN/
+/*
+!.gitignore
+!/Desktop/
+/Desktop/*
+!/Desktop/SHIN/
+!/Desktop/SHIN/**/
+
+# Common build artifacts inside SHIN
+Desktop/SHIN/**/node_modules/
+Desktop/SHIN/**/target/
+Desktop/SHIN/**/.next/
+Desktop/SHIN/**/__pycache__/
+Desktop/SHIN/**/*.class
+Desktop/SHIN/**/*.jar
+Desktop/SHIN/**/*.war
+Desktop/SHIN/**/.env
+Desktop/SHIN/**/.env.local
+Desktop/SHIN/**/.DS_Store
+Desktop/SHIN/**/dist/
+Desktop/SHIN/**/build/
