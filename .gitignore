@@ -12,12 +12,14 @@
 !/.opencode/plugins/
 /.opencode/plugins/*
 !/.opencode/plugins/ee-experience/
+!/.opencode/plugins/ee-experience/**
 /.opencode/plugins/ee-experience/node_modules/
 !/.agents/
 /.agents/*
 !/.agents/skills/
 /.agents/skills/*
 !/.agents/skills/engineering-experience-engine/
+!/.agents/skills/engineering-experience-engine/**
 
 # Common build artifacts inside SHIN
 Desktop/SHIN/**/node_modules/
