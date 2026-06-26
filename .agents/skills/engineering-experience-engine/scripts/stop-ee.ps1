@@ -5,18 +5,24 @@ param(
 
 $ErrorActionPreference = "SilentlyContinue"
 
-$conn = Get-NetTCPConnection -LocalPort $Port -ErrorAction SilentlyContinue
-if (-not $conn) {
+$conns = Get-NetTCPConnection -LocalPort $Port -ErrorAction SilentlyContinue | Where-Object { $_.State -eq "Listen" }
+if (-not $conns) {
     Write-Host "EE not running on port $Port"
     exit 0
 }
 
-$pid = $conn.OwningProcess
-$proc = Get-Process -Id $pid -ErrorAction SilentlyContinue
-if (-not $proc) {
-    Write-Host "EE process not found (PID: $pid)"
+# Find the Java process owning the port (skip any shell wrappers)
+$pid = ($conns | ForEach-Object { $_.OwningProcess } | Select-Object -Unique | Where-Object {
+    $p = Get-Process -Id $_ -ErrorAction SilentlyContinue
+    $p -and $p.ProcessName -eq "java"
+}) | Select-Object -First 1
+
+if (-not $pid) {
+    Write-Host "EE Java process not found on port $Port"
     exit 0
 }
+
+$proc = Get-Process -Id $pid -ErrorAction SilentlyContinue
 
 Write-Host "Stopping EE (PID: $pid, Process: $($proc.ProcessName))..."
 

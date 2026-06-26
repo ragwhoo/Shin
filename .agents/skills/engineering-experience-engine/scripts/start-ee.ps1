@@ -33,8 +33,7 @@ $env:ENGINEERING_BRAIN_PATH = $BrainPath
 $process = Start-Process -WindowStyle Hidden -FilePath "mvn.cmd" `
     -ArgumentList "spring-boot:run" `
     -WorkingDirectory $BackendPath `
-    -PassThru `
-    -NoNewWindow
+    -PassThru
 
 # Wait for service to be ready
 $timer = [System.Diagnostics.Stopwatch]::StartNew()

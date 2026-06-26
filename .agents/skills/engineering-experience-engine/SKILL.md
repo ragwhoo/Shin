@@ -12,12 +12,12 @@ The Engineering Experience Engine (EE) is a **mandatory** engineering judgment l
 The EE plugin enforces this through **4 enforcement layers**:
 1. **System prompt injection** — instructions baked into every conversation
 2. **Permission gate** — denies write/execute permissions until review succeeds
-3. **Tool gate** — blocks edit/write/bash by modifying args to surface gate message
+3. **Tool gate** — blocks edit/write by modifying args to surface gate message
 4. **Session-end safety** — queues unextracted learnings for recovery
 
 **The only valid workflow:**
 ```
-Task → ee_review → Judgment Package → Plan → Implement → ee_learn
+Task → curl review API → Judgment Package → Plan → Implement → curl learn API
 ```
 
 **The following is BLOCKED:**
@@ -33,22 +33,20 @@ User Request
 ┌─────────────────────────────────────────────┐
 │  Layer 1: System Prompt (experimental.chat. │
 │           system.transform)                  │
-│  Injects: "Implementation tools blocked     │
-│           until ee_review succeeds"          │
+│  Injects: "edit/write blocked until review  │
+│           succeeds"                          │
 └─────────────────────────────────────────────┘
       ↓
-Agent considers using edit/write/bash
+Agent considers using edit/write
       ↓
 ┌─────────────────────────────────────────────┐
 │  Layer 2: Permission Gate (permission.ask)  │
 │  If reviewCompleted == false: DENY          │
-│  User sees: permission denied               │
 └─────────────────────────────────────────────┘
       ↓
 ┌─────────────────────────────────────────────┐
 │  Layer 3: Tool Gate (tool.execute.before)   │
 │  If reviewCompleted == false:               │
-│    bash → command replaced with gate msg    │
 │    edit → oldString made unmatchable        │
 │    write → redirected to temp file          │
 └─────────────────────────────────────────────┘
@@ -59,7 +57,6 @@ Task completed
 │  Layer 4: Learning Enforcement              │
 │  If reviewCompleted AND implementationDone  │
 │  AND NOT learningCompleted:                 │
-│    → System prompt reminder                 │
 │    → Session end: queue to pending-learn.yml│
 └─────────────────────────────────────────────┘
 ```
@@ -76,12 +73,13 @@ experimental.chat.system.transform fires
       ↓
 User sends task
       ↓
-EE checks: is EE backend running on :8080?
-  → No → auto-start via ee_start (or manual)
-  → Yes → ready
+Agent checks: is EE backend running on :8080?
+  → curl.exe -s http://localhost:8080/api/v1/concepts
+  → If down → run: powershell -File "$env:USERPROFILE\.agents\skills\engineering-experience-engine\scripts\start-ee.ps1"
       ↓
-Agent calls ee_review(task)
-  → tool.execute.after fires
+Agent runs review via bash+curl:
+  curl.exe -X POST http://localhost:8080/api/v1/review -H "Content-Type: application/json" -d '{"task":"..."}'
+  → tool.execute.after detects review JSON in output
   → reviewCompleted = true for this session
       ↓
 Agent displays judgment package
@@ -90,17 +88,16 @@ Agent states adopted recommendations
       ↓
 Agent produces plan (Risks, Architecture, Plan, Tests, Deployment)
       ↓
-Agent tries edit/write/bash
+Agent tries edit/write
   → permission.ask fires → permission granted (review done)
   → tool.execute.before fires → tracks implementationStarted = true
   → Tool executes normally
       ↓
 Implementation complete
       ↓
-System prompt reminder: "ee_learn required"
-      ↓
-Agent calls ee_learn(type, title, content)
-  → tool.execute.after fires → learningCompleted = true
+Agent submits learnings via bash+curl:
+  curl.exe -X POST http://localhost:8080/api/v1/learn -H "Content-Type: application/json" -d '{"type":"experience","title":"...","content":"..."}'
+  → tool.execute.after detects success → learningCompleted = true
   → Knowledge persisted to engineering-brain/
       ↓
 OpenCode Closes
@@ -112,18 +109,20 @@ OpenCode Closes
 
 ## Tool Gating Details
 
-### Blocked tools (until ee_review succeeds):
+### Blocked tools (until review succeeds):
 
 | Tool | Block Behavior |
 |---|---|
-| `bash` | Command replaced with gate message + exit 1 |
 | `edit` | oldString set to unmatchable token (harmless failure) |
 | `write` | Redirected to `%TEMP%\EE_BLOCKED_<timestamp>.txt` |
+
+### Not blocked (always available):
+- `bash` — needed for curl API calls, git, npm, tests, etc.
 
 ### If a tool gets blocked:
 
 1. The gate message tells you exactly why
-2. Call `ee_review(task="...")` immediately
+2. Run the review curl command immediately
 3. After review completes, retry the blocked operation
 4. The gate automatically opens once review is confirmed
 
@@ -133,15 +132,23 @@ Tracked per session by the plugin:
 
 | State | Set When | Purpose |
 |---|---|---|
-| `reviewCompleted` | ee_review succeeds | Allows implementation tools |
-| `implementationStarted` | First edit/write/bash after review | Triggers learning requirement |
-| `learningCompleted` | ee_learn succeeds | Satisfies learning requirement |
+| `reviewCompleted` | curl review API returns valid judgment | Allows edit/write tools |
+| `implementationStarted` | First edit/write after review | Triggers learning requirement |
+| `learningCompleted` | curl learn API returns success | Satisfies learning requirement |
 
 ## Pre-Planning Workflow
 
-After ee_review returns a judgment package:
+After review curl returns a judgment package:
 
-### Step 1: Display Judgment Package
+### Step 1: Run Review
+
+```bash
+curl.exe -X POST http://localhost:8080/api/v1/review `
+  -H "Content-Type: application/json" `
+  -d '{"task":"Describe what you are about to build or fix"}'
+```
+
+### Step 2: Display Judgment Package
 
 ```
 Experience Review
@@ -161,14 +168,14 @@ Recommendations:
 Evidence: ...
 ```
 
-### Step 2: Analyze
+### Step 3: Analyze
 
 1. **Lessons** — which past experiences are relevant? What failures should be avoided?
 2. **Warnings** — what does the engine flag as high-risk?
 3. **Recommendations** — which architectures, technologies, or patterns are suggested?
 4. **Evidence** — what principles, experiences, and decisions support the findings?
 
-### Step 3: State Adoptions
+### Step 4: State Adoptions
 
 Explicitly state which recommendations were adopted and why:
 
@@ -178,7 +185,7 @@ Recommendations Adopted:
 - [recommendation] — not adopted because [reason]
 ```
 
-### Step 4: Produce Plan
+### Step 5: Produce Plan
 
 Only after review, produce:
 
@@ -192,43 +199,37 @@ Deployment Considerations
 
 ## Post-Execution Learning
 
-After implementation completes, call `ee_learn` with extracted knowledge.
+After implementation completes, submit extracted knowledge via curl.
 
 ### Experience:
-```yaml
-title: <descriptive title>
-problem: <what problem was solved>
-root_cause: <why it occurred>
-solution: <how it was fixed>
-outcome: <result>
-tags: [<tag1>, <tag2>]
-confidence: 0.7
+```bash
+curl.exe -X POST http://localhost:8080/api/v1/learn `
+  -H "Content-Type: application/json" `
+  -d '{\"type\":\"experience\",\"title\":\"<title>\",\"content\":\"title: <title>\\nproblem: <what problem>\\nroot_cause: <why>\\nsolution: <how fixed>\\noutcome: <result>\\ntags: [tag1, tag2]\\nconfidence: 0.7\"}'
 ```
 
 ### Principle:
-```yaml
-title: <principle title>
-lesson: <the lesson learned>
-confidence: 0.7
+```bash
+curl.exe -X POST http://localhost:8080/api/v1/learn `
+  -H "Content-Type: application/json" `
+  -d '{\"type\":\"principle\",\"title\":\"<title>\",\"content\":\"title: <title>\\nlesson: <lesson>\\nconfidence: 0.7\"}'
 ```
 
 ### Failure:
-```yaml
-title: <failure title>
-impact: <what happened>
-lesson: <how to prevent>
-confidence: 0.7
+```bash
+curl.exe -X POST http://localhost:8080/api/v1/learn `
+  -H "Content-Type: application/json" `
+  -d '{\"type\":\"failure\",\"title\":\"<title>\",\"content\":\"title: <title>\\nimpact: <what happened>\\nlesson: <how to prevent>\\nconfidence: 0.7\"}'
 ```
 
 ### Architecture:
-```yaml
-title: <architecture title>
-components: [<component1>, <component2>]
-used_in: <context>
-confidence: 0.6
+```bash
+curl.exe -X POST http://localhost:8080/api/v1/learn `
+  -H "Content-Type: application/json" `
+  -d '{\"type\":\"architecture\",\"title\":\"<title>\",\"content\":\"title: <title>\\ncomponents: [comp1, comp2]\\nused_in: <context>\\nconfidence: 0.6\"}'
 ```
 
-After `ee_learn`, also persist the memory to `engineering-brain/` on disk:
+After successful learn API call, also persist the memory to `engineering-brain/` on disk:
 - `engineering-brain/experiences/` for experiences
 - `engineering-brain/principles/` for principles
 - `engineering-brain/failures/` for failures
@@ -238,19 +239,34 @@ Update `engineering-brain/graph/relations.yml` if new edges are needed.
 
 ## Recovery: Pending Learnings
 
-If a session ends without calling `ee_learn` after implementation:
+If a session ends without submitting learnings after implementation:
 
 1. The plugin writes to `~/.agents/skills/engineering-experience-engine/pending-learn.yml`
-2. Next session: call `ee_pending` to check for pending items
-3. Review the work done and submit learnings via `ee_learn`
+2. Next session: check the pending file via bash and submit learnings via curl
+
+## Starting the Backend
+
+If the EE backend is not running:
+
+```powershell
+powershell -File "$env:USERPROFILE\.agents\skills\engineering-experience-engine\scripts\start-ee.ps1"
+```
+
+Or:
+```bash
+cd ~/Desktop/SHIN/experience-engine/backend
+mvn spring-boot:run -q
+```
+
+The plugin also auto-starts the backend when it detects a curl command targeting the review API.
 
 ## Backend Troubleshooting
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| Permission denied for write | review not completed | Call ee_review first |
-| Tool blocked with gate message | review not completed | Call ee_review first |
-| Connection refused | EE not started | ee_review auto-starts it; or run start-ee.ps1 |
+| Permission denied for write | review not completed | Run review curl first |
+| Tool blocked with gate message | review not completed | Run review curl first |
+| Connection refused | EE not started | Run start-ee.ps1 or let plugin auto-start it |
 | 500 from review | Brain YAML error | Check engineering-brain YAML syntax |
 | No concepts matched | Task too vague | Broaden task description |
 | Low confidence | No relevant experience | Proceed normally |
@@ -269,9 +285,12 @@ If a session ends without calling `ee_learn` after implementation:
 
 ~/.opencode/plugins/ee-experience/
   plugin.json
-  dist/plugin.js             # Enforcement plugin (4 hooks)
+  dist/plugin.js             # Enforcement plugin (hooks only, no custom tools)
+
+~/.config/opencode/plugins/ee-experience/
+  package.json               # Auto-discovery location (copy of above)
 
 ~/Desktop/SHIN/
   engineering-brain/         # YAML knowledge base (canonical source)
-  experience-engine/         # Backend + frontend
+  experience-engine/         # Backend
 ```
