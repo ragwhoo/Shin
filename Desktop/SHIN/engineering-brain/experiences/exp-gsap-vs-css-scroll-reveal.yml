@@ -1,0 +1,16 @@
+id: exp-gsap-vs-css-scroll-reveal
+title: GSAP ScrollTrigger unreliable for card reveals — CSS transitions + IntersectionObserver more robust
+concept: concept-gsap-animation
+problem: GSAP gsap.from() with ScrollTrigger was unreliable — cards would either not appear or trigger late. Multiple approaches were tried: gsap.from(), gsap.fromTo(), timeline + ScrollTrigger. Each had issues with elements staying invisible (immediateRender: true) or triggering at wrong scroll positions.
+root_cause: gsap.from() sets immediateRender: true by default, making elements invisible immediately. ScrollTrigger then controls when the animation plays — but if ScrollTrigger calculation is off (due to Lenis smooth scroll interference or the trigger element being below a min-h-screen section), the animation never fires, leaving elements permanently invisible.
+solution: Replaced GSAP ScrollTrigger with CSS transitions + IntersectionObserver. CSS sets the initial hidden state (opacity: 0, filter: blur(12px), transform: translateY(60px)) and a .visible class triggers the animated state. IntersectionObserver toggles the class reliably. No library dependency, no timing issues.
+outcome: Success
+confidence: 0.95
+usage_count: 1
+tags:
+  - gsap
+  - scrolltrigger
+  - css-transitions
+  - intersection-observer
+  - animation
+  - nextjs

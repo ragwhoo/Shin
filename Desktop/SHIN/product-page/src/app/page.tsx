@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import PillNav from "@/components/ui/PillNav"
 import { Footer10 } from "@/components/watermelon-ui/footer-10"
@@ -21,7 +20,7 @@ import {
   type TabContent,
 } from "@/components/ui/terminal-animation";
 
-gsap.registerPlugin(ScrollTrigger);
+const COPY_COMMAND = "npm install -g shin-engine";
 
 const tabs: TabContent[] = [
   {
@@ -38,8 +37,16 @@ const tabs: TabContent[] = [
   },
 ];
 
+const navItems = [
+  { label: "Home", href: "/" },
+  { label: "Docs", href: "/docs" },
+  { label: "GitHub", href: "https://github.com/ragwhoo/Shin.git", target: "_blank", rel: "noopener noreferrer" },
+  { label: "npm", href: "https://www.npmjs.com/package/shin-engine", target: "_blank", rel: "noopener noreferrer" },
+];
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState(0);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if ("scrollRestoration" in history) history.scrollRestoration = "manual";
@@ -93,34 +100,13 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const lenis = new Lenis({ duration: 1.2 });
-    lenis.on("scroll", ScrollTrigger.update);
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-    return () => lenis.destroy();
-  }, []);
-
-  const handleGetStarted = () => {
-    const el = document.getElementById("install");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <>
       <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4">
         <PillNav
           logo="/shin-logo.png"
           logoAlt="SHIN"
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Docs", href: "/docs" },
-            { label: "GitHub", href: "https://github.com/ragwhoo/Shin.git", target: "_blank", rel: "noopener noreferrer" },
-            { label: "npm", href: "https://www.npmjs.com/package/shin-engine", target: "_blank", rel: "noopener noreferrer" },
-          ]}
+          items={navItems}
           activeHref="/"
           baseColor="#000000"
           pillColor="#ffffff"
@@ -313,6 +299,27 @@ export default function Home() {
               <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
               <div className="w-3 h-3 rounded-full bg-green-500/80" />
               <span className="ml-4 px-3 py-1 text-xs rounded-md bg-zinc-800 text-zinc-100">install</span>
+              <div className="ml-auto relative">
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(COPY_COMMAND);
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 1500);
+                  }}
+                  className="text-zinc-500 hover:text-amber-200 transition-colors"
+                  aria-label="Copy install command"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                  </svg>
+                </button>
+                {copied && (
+                  <div className="absolute top-full right-0 mt-1 bg-amber-100 text-neutral-900 text-xs px-2.5 py-1 rounded font-sans whitespace-nowrap">
+                    Copied!
+                  </div>
+                )}
+              </div>
             </div>
             <div className="p-5 font-mono text-sm space-y-2">
               <div className="flex items-center gap-2">

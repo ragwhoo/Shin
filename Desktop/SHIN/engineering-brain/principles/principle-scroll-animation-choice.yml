@@ -1,0 +1,14 @@
+id: principle-scroll-animation-choice
+title: For scroll-triggered entrance animations, prefer CSS transitions + IntersectionObserver over GSAP ScrollTrigger
+concept: concept-gsap-animation
+problem: GSAP ScrollTrigger introduces timing complexity, immediateRender issues, and Lenis integration problems for simple scroll reveals.
+solution: Use CSS transitions for the animation itself (GPU-accelerated, no JS overhead) and IntersectionObserver just to toggle a .visible class. Reserve GSAP ScrollTrigger for cases requiring scrub, pinning, or timeline sequencing across multiple elements. For simple opacity/blur/translate reveals, CSS is more reliable, lighter, and easier to debug.
+outcome: Success
+confidence: 0.9
+usage_count: 1
+tags:
+  - gsap
+  - css
+  - animation
+  - performance
+  - scrolltrigger
