@@ -7,6 +7,8 @@ const https = require("https");
 const http = require("http");
 const os = require("os");
 
+const PKG = require(join(__dirname, "..", "package.json"));
+const VERSION = PKG.version;
 const EE_HOME = join(os.homedir(), ".ee");
 const BRAIN_DIR = join(EE_HOME, "engineering-brain");
 const JAR = join(EE_HOME, "ee.jar");
@@ -134,6 +136,11 @@ async function ensureSetup() {
 }
 
 async function main() {
+  if (cmd === "--version" || cmd === "-v") {
+    log("shin-engine v" + VERSION);
+    return;
+  }
+
   if (!cmd) {
     log("Usage: shin <command>");
     log("Run 'shin --help' for options");
@@ -200,6 +207,7 @@ async function main() {
     log("  shin stop     Stop the SHIN backend");
     log("  shin status   Check if SHIN is running");
     log("  shin view     Open the SHIN dashboard in browser");
+    log("  shin --version  Show version");
     return;
   }
 
