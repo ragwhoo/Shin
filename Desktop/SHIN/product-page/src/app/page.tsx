@@ -56,12 +56,14 @@ export default function Home() {
       gsap.set(".hero-bg", { opacity: 0, filter: "blur(12px)" });
       gsap.set(".hero-heading", { opacity: 0, filter: "blur(12px)", y: 60 });
       gsap.set(".hero-subtitle", { opacity: 0, filter: "blur(12px)", y: 60 });
+      gsap.set(".hero-cta", { opacity: 0, filter: "blur(12px)", y: 60 });
       gsap.set(".hero-scroll", { opacity: 0 });
 
       const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
       heroTl.to(".hero-bg", { opacity: 1, filter: "blur(0px)", duration: 1.5 })
            .to(".hero-heading", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5 }, "-=0.8")
            .to(".hero-subtitle", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5 }, "-=0.8")
+           .to(".hero-cta", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5 }, "-=0.8")
            .to(".hero-scroll", { opacity: 1, duration: 1 }, "-=0.4");
     });
 
@@ -131,6 +133,16 @@ export default function Home() {
           <p className="mt-4 text-lg md:text-xl text-white max-w-xl mx-auto hero-subtitle">
             Persistent engineering judgment for AI coding agents.
           </p>
+          <a
+            href="#install"
+            className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white/10 hover:border-white/30 transition-all duration-300 hero-cta"
+          >
+            Get Started
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14" />
+              <path d="M12 5l7 7-7 7" />
+            </svg>
+          </a>
         </div>
 
         <div className="w-full flex-1 flex flex-col items-center hero-terminal">
