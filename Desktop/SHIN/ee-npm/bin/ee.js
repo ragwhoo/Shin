@@ -158,12 +158,12 @@ async function main() {
   }
 
   if (cmd === "--help" || cmd === "-h") {
-    log("Usage: ee <command>");
+    log("Usage: shin <command>");
     log("");
     log("Commands:");
-    log("  ee start    Start the EE backend (first run downloads + installs)");
-    log("  ee stop     Stop the EE backend");
-    log("  ee status   Check if EE is running");
+    log("  shin start    Start the EE backend (first run downloads + installs)");
+    log("  shin stop     Stop the EE backend");
+    log("  shin status   Check if EE is running");
     return;
   }
 

@@ -1,11 +1,20 @@
 {
-  "name": "@experience-engine/ee",
-  "version": "1.0.0",
+  "name": "shin-engine",
+  "version": "1.0.2",
   "description": "Engineering Experience Engine — engineering judgment for AI coding agents",
   "bin": {
-    "ee": "bin/ee.js"
+    "shin": "bin/ee.js"
   },
-  "files": ["bin", "lib"],
-  "keywords": ["opencode", "engineering", "experience", "knowledge", "brain"],
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "keywords": [
+    "opencode",
+    "engineering",
+    "experience",
+    "knowledge",
+    "brain"
+  ],
   "license": "MIT"
 }
