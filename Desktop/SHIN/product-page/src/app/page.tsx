@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Lenis from "lenis";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import PillNav from "@/components/ui/PillNav"
 import {
@@ -17,6 +19,8 @@ import {
   TerminalAnimationTabTrigger,
   type TabContent,
 } from "@/components/ui/terminal-animation";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const tabs: TabContent[] = [
   {
@@ -46,6 +50,64 @@ export default function Home() {
     return () => lenis.destroy();
   }, []);
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.set(".hero-bg", { opacity: 0, filter: "blur(12px)" });
+      gsap.set(".hero-heading", { opacity: 0, filter: "blur(12px)", y: 60 });
+      gsap.set(".hero-subtitle", { opacity: 0, filter: "blur(12px)", y: 60 });
+      gsap.set(".hero-terminal", { opacity: 0, filter: "blur(12px)", y: 60 });
+      gsap.set(".hero-scroll", { opacity: 0 });
+      gsap.set(".why-shin-heading", { opacity: 0, filter: "blur(12px)", y: 60 });
+      gsap.set(".why-shin-card", { opacity: 0, filter: "blur(12px)", y: 60 });
+      gsap.set(".install-heading", { opacity: 0, filter: "blur(12px)", y: 60 });
+      gsap.set(".install-terminal", { opacity: 0, filter: "blur(12px)", y: 60 });
+
+      gsap.to(".hero-bg", { opacity: 1, filter: "blur(0px)", duration: 1.5, ease: "power3.out" });
+
+      gsap.to(".hero-heading", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5, ease: "power3.out", delay: 0.1 });
+
+      gsap.to(".hero-subtitle", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5, ease: "power3.out", delay: 0.3 });
+
+      gsap.to(".hero-terminal", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5, ease: "power3.out", delay: 0.5 });
+
+      gsap.to(".hero-scroll", { opacity: 1, duration: 1, ease: "power3.out", delay: 1.2 });
+
+      gsap.to(".why-shin-heading", {
+        opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5, ease: "power3.out",
+        scrollTrigger: { trigger: ".why-shin-section", start: "top 80%", toggleActions: "play reverse play reverse" },
+      });
+
+      gsap.to(".why-shin-card", {
+        opacity: 1, filter: "blur(0px)", y: 0, duration: 1, ease: "power3.out", stagger: 0.15,
+        scrollTrigger: { trigger: ".why-shin-section", start: "top 75%", toggleActions: "play reverse play reverse" },
+      });
+
+      gsap.to(".install-heading", {
+        opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5, ease: "power3.out",
+        scrollTrigger: { trigger: ".install-section", start: "top 80%", toggleActions: "play reverse play reverse" },
+      });
+
+      gsap.to(".install-terminal", {
+        opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5, ease: "power3.out", delay: 0.2,
+        scrollTrigger: { trigger: ".install-section", start: "top 75%", toggleActions: "play reverse play reverse" },
+      });
+    });
+
+    ScrollTrigger.refresh();
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    const lenis = new Lenis({ duration: 1.2 });
+    lenis.on("scroll", () => ScrollTrigger.update());
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    return () => lenis.destroy();
+  }, []);
+
   return (
     <>
       <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4">
@@ -54,8 +116,8 @@ export default function Home() {
           logoAlt="SHIN"
           items={[
             { label: "Home", href: "/" },
-            { label: "GitHub", href: "https://github.com/anomalyco/shin" },
-            { label: "npm", href: "https://www.npmjs.com/package/shin-engine" },
+            { label: "GitHub", href: "https://github.com/anomalyco/shin", target: "_blank", rel: "noopener noreferrer" },
+            { label: "npm", href: "https://www.npmjs.com/package/shin-engine", target: "_blank", rel: "noopener noreferrer" },
           ]}
           activeHref="/"
           baseColor="#000000"
@@ -65,27 +127,24 @@ export default function Home() {
         />
       </div>
 
-      <div className="min-h-screen flex flex-col relative bg-black">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-blue-500/30 blur-[150px]" />
-          <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-pink-500/25 blur-[140px]" />
-          <div className="absolute bottom-0 left-1/3 w-[600px] h-[600px] rounded-full bg-amber-100/35 blur-[150px]" />
-        </div>
-      <div className="flex-1 flex flex-col items-center px-4 pt-32">
+      <div className="min-h-screen flex flex-col bg-black relative overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center pointer-events-none hero-bg" style={{ backgroundImage: "url(/bg1.png)" }} />
+      <div className="flex-1 flex flex-col items-center px-4 pt-32 relative z-10">
         <div className="text-center mb-16">
           <h1
-            className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight text-white leading-[1.1]"
+            className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight text-white leading-[1.1] hero-heading"
           >
             Engineering,{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-amber-100 to-blue-400">
-              Remembered.
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-blue-300">
+              REMEMBERED.
             </span>
           </h1>
-          <p className="mt-4 text-lg md:text-xl text-white/60 max-w-xl mx-auto">
+          <p className="mt-4 text-lg md:text-xl text-white max-w-xl mx-auto hero-subtitle">
             Persistent engineering judgment for AI coding agents.
           </p>
         </div>
 
+        <div className="w-full flex-1 flex flex-col items-center hero-terminal">
         <TerminalAnimationRoot
           tabs={tabs}
           activeTab={activeTab}
@@ -149,8 +208,119 @@ export default function Home() {
             </TerminalAnimationWindow>
           </TerminalAnimationContainer>
         </TerminalAnimationRoot>
+        </div>
+      </div>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 hero-scroll">
+        <span className="text-zinc-500 text-xs tracking-widest uppercase">Scroll</span>
+        <div className="w-5 h-8 rounded-full border-2 border-zinc-600 flex justify-center pt-1.5">
+          <div className="w-1 h-2 rounded-full bg-zinc-400 animate-[scroll-bounce_2s_ease-in-out_infinite]" />
+        </div>
       </div>
     </div>
-    <section className="min-h-screen bg-white" />
+    <section className="min-h-screen bg-white why-shin-section">
+      <div className="max-w-6xl mx-auto px-6 py-24 md:py-32">
+        <div className="text-center mb-20 why-shin-heading">
+          <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold text-neutral-900 leading-[1.1]">
+            <span className="whitespace-nowrap">Knowledge isn't</span>{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-blue-400 to-amber-300">
+              EXPERIENCE
+            </span>
+          </h2>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+          {[
+            {
+              title: "Persistent Memory",
+              description: "Every review, every fix, every lesson learned becomes part of a growing engineering knowledge graph that your agents carry forward.",
+              gradient: "from-blue-500/10 via-blue-400/5 to-transparent",
+              icon: (
+                <svg className="w-8 h-8 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+              ),
+              iconBg: "bg-blue-50 text-blue-600",
+            },
+            {
+              title: "Judgment, Not Just Code",
+              description: "SHIN doesn't just read your codebase — it understands the context, the tradeoffs, and the engineering principles behind every decision.",
+              gradient: "from-amber-200/20 via-amber-100/10 to-transparent",
+              icon: (
+                <svg className="w-8 h-8 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 12l2 2 4-4" />
+                  <path d="M12 2a10 10 0 1 0 10 10" />
+                </svg>
+              ),
+              iconBg: "bg-amber-50 text-amber-600",
+            },
+            {
+              title: "Experience That Ships",
+              description: "Confidence scores, warnings, and actionable recommendations — every agent response comes backed by real engineering experience, not just pattern matching.",
+              gradient: "from-pink-500/10 via-pink-400/5 to-transparent",
+              icon: (
+                <svg className="w-8 h-8 text-pink-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14" />
+                  <path d="M12 5l7 7-7 7" />
+                </svg>
+              ),
+              iconBg: "bg-pink-50 text-pink-600",
+            },
+          ].map((feature) => (
+            <div
+              key={feature.title}
+              className="group relative rounded-2xl border border-neutral-200 bg-white p-8 transition-all duration-300 hover:border-neutral-300 hover:shadow-lg hover:-translate-y-1 why-shin-card"
+            >
+              <div className={`absolute inset-0 rounded-2xl bg-gradient-to-b ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+              <div className="relative z-10">
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${feature.iconBg}`}>
+                  {feature.icon}
+                </div>
+                <h3 className="text-lg font-semibold text-neutral-900 mb-3">{feature.title}</h3>
+                <p className="text-neutral-500 text-sm leading-relaxed">{feature.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+    <section className="min-h-screen bg-white flex items-center install-section">
+      <div className="max-w-6xl mx-auto px-6 py-24 md:py-32 w-full">
+        <div className="text-center mb-12 install-heading">
+          <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight text-neutral-900 leading-[1.1]">
+            <span className="whitespace-nowrap">Install in</span>
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-blue-400 to-amber-300">
+              ONE COMMAND
+            </span>
+          </h2>
+        </div>
+        <div className="w-full max-w-2xl mx-auto install-terminal">
+          <div className="rounded-xl border border-zinc-800 bg-[#0f0f14] shadow-2xl shadow-black/40 overflow-hidden">
+            <div className="flex items-center gap-1.5 px-4 py-3 border-b border-zinc-800">
+              <div className="w-3 h-3 rounded-full bg-red-500/80" />
+              <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+              <div className="w-3 h-3 rounded-full bg-green-500/80" />
+              <span className="ml-4 px-3 py-1 text-xs rounded-md bg-zinc-800 text-zinc-100">install</span>
+            </div>
+            <div className="p-5 font-mono text-sm space-y-2">
+              <div className="flex items-center gap-2">
+                <span className="text-amber-200">$</span>
+                <span className="text-amber-100">npm install -g shin-engine</span>
+                <span className="w-2 h-5 bg-amber-200/70 animate-pulse" />
+              </div>
+              <div className="text-amber-100/70 space-y-1">
+                <div>⠋ fetching package metadata...</div>
+                <div>✔ resolved 1 package</div>
+                <div>⠙ installing...</div>
+                <div>✔ installed shin-engine v1.0.0</div>
+              </div>
+            </div>
+          </div>
+          <p className="text-center text-neutral-500 text-lg mt-8">
+            — and ship with confidence.
+          </p>
+        </div>
+      </div>
+    </section>
   </>);
 }
