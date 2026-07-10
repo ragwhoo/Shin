@@ -74,7 +74,7 @@ function installJava() {
 async function ensureSetup() {
   if (existsSync(JAR)) return true;
 
-  step("SHIN first-time setup");
+  step("SHIN v" + VERSION + " first-time setup");
 
   // Check/Install Java
   try {
@@ -142,13 +142,14 @@ async function main() {
   }
 
   if (!cmd) {
+    log("shin-engine v" + VERSION);
     log("Usage: shin <command>");
     log("Run 'shin --help' for options");
     return;
   }
 
   if (cmd === "start") {
-    if (isRunning()) { log("SHIN is already running on port " + PORT); return; }
+    if (isRunning()) { log("SHIN v" + VERSION + " is already running on port " + PORT); return; }
     const setup = await ensureSetup();
     if (!setup) { process.exit(1); }
 
@@ -163,7 +164,7 @@ async function main() {
     for (let i = 0; i < 30; i++) {
       await sleep(1000);
       if (isRunning()) {
-        log("SHIN ready on port " + PORT);
+        log("SHIN v" + VERSION + " ready on port " + PORT);
         log("\nTell your OpenCode agent: 'load the engineering-experience-engine skill'");
         return;
       }
@@ -185,7 +186,7 @@ async function main() {
 
   if (cmd === "status") {
     if (isRunning()) {
-      log("SHIN is running on port " + PORT);
+      log("SHIN v" + VERSION + " is running on port " + PORT);
     } else {
       log("SHIN is not running");
     }
