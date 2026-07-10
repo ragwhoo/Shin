@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -65,22 +65,27 @@ export default function Home() {
            .to(".hero-subtitle", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5 }, "-=0.8")
            .to(".hero-terminal", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5 }, "-=0.8")
            .to(".hero-scroll", { opacity: 1, duration: 1 }, "-=0.4");
-
-      const whyTl = gsap.timeline({
-        scrollTrigger: { trigger: ".why-shin-section", start: "top bottom-=150", toggleActions: "play reverse play reverse" },
-      });
-      whyTl.from(".why-shin-heading", { opacity: 0, filter: "blur(12px)", y: 60, duration: 1.2, ease: "power2.out" })
-           .from(".why-shin-card", { opacity: 0, filter: "blur(12px)", y: 60, duration: 0.8, ease: "power2.out", stagger: 0.15 }, "-=0.6");
-
-      const installTl = gsap.timeline({
-        scrollTrigger: { trigger: ".install-section", start: "top bottom-=150", toggleActions: "play reverse play reverse" },
-      });
-      installTl.from(".install-heading", { opacity: 0, filter: "blur(12px)", y: 60, duration: 1.2, ease: "power2.out" })
-               .from(".install-terminal", { opacity: 0, filter: "blur(12px)", y: 60, duration: 1.2, ease: "power2.out" }, "-=0.6");
     });
 
-    ScrollTrigger.refresh();
     return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          } else {
+            entry.target.classList.remove("visible");
+          }
+        });
+      },
+      { threshold: 0, rootMargin: "-50px" }
+    );
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -205,7 +210,7 @@ export default function Home() {
     </div>
     <section className="min-h-screen bg-white why-shin-section">
       <div className="max-w-6xl mx-auto px-6 py-24 md:py-32">
-        <div className="text-center mb-20 why-shin-heading">
+        <div className="text-center mb-20 why-shin-heading reveal">
           <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold text-neutral-900 leading-[1.1]">
             <span className="whitespace-nowrap">Knowledge isn't</span>{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-blue-400 to-amber-300">
@@ -251,10 +256,10 @@ export default function Home() {
               ),
               iconBg: "bg-pink-50 text-pink-600",
             },
-          ].map((feature) => (
+          ].map((feature, i) => (
             <div
               key={feature.title}
-              className="group relative rounded-2xl border border-neutral-200 bg-white p-8 transition-all duration-300 hover:border-neutral-300 hover:shadow-lg hover:-translate-y-1 why-shin-card"
+              className={`group relative rounded-2xl border border-neutral-200 bg-white p-8 transition-all duration-300 hover:border-neutral-300 hover:shadow-lg hover:-translate-y-1 why-shin-card reveal reveal-d${i + 1}`}
             >
               <div className={`absolute inset-0 rounded-2xl bg-gradient-to-b ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
               <div className="relative z-10">
@@ -271,7 +276,7 @@ export default function Home() {
     </section>
     <section className="min-h-screen bg-white flex items-center install-section">
       <div className="max-w-6xl mx-auto px-6 py-24 md:py-32 w-full">
-        <div className="text-center mb-12 install-heading">
+        <div className="text-center mb-12 install-heading reveal">
           <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight text-neutral-900 leading-[1.1]">
             <span className="whitespace-nowrap">Install in</span>
             <br />
@@ -280,7 +285,7 @@ export default function Home() {
             </span>
           </h2>
         </div>
-        <div className="w-full max-w-2xl mx-auto install-terminal">
+        <div className="w-full max-w-2xl mx-auto install-terminal reveal">
           <div className="rounded-xl border border-zinc-800 bg-[#0f0f14] shadow-2xl shadow-black/40 overflow-hidden">
             <div className="flex items-center gap-1.5 px-4 py-3 border-b border-zinc-800">
               <div className="w-3 h-3 rounded-full bg-red-500/80" />
