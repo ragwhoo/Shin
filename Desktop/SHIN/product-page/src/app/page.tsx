@@ -301,7 +301,7 @@ export default function Home() {
           <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight text-neutral-900 leading-[1.1]">
             <span className="whitespace-nowrap">Install in</span>
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-blue-400 to-amber-300">
+            <span className="text-transparent bg-clip-text bg-[linear-gradient(to_right,#3b82f6,#93c5fd,#fbcfe8)]">
               ONE COMMAND
             </span>
           </h2>
