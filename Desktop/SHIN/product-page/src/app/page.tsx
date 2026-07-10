@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -98,6 +98,11 @@ export default function Home() {
     requestAnimationFrame(raf);
     return () => lenis.destroy();
   }, []);
+
+  const handleGetStarted = () => {
+    const el = document.getElementById("install");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <>
