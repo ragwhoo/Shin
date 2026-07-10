@@ -274,7 +274,7 @@ export default function Home() {
         </div>
       </div>
     </section>
-    <section className="min-h-screen bg-white flex items-center install-section">
+    <section className="min-h-screen bg-white flex items-center install-section" id="install">
       <div className="max-w-6xl mx-auto px-6 py-24 md:py-32 w-full">
         <div className="text-center mb-12 install-heading reveal">
           <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight text-neutral-900 leading-[1.1]">
@@ -314,6 +314,10 @@ export default function Home() {
       </div>
     </section>
     <Footer10
+      bannerTagline="Engineering, Remembered"
+      bannerHeading="Give your AI agents the experience they need to ship with confidence."
+      bannerCtaLabel="Get Started"
+      bannerCtaHref="#install"
       bannerBackgroundImage="/bg2.png"
       contactLabel="Reach out :"
       contactEmail="ragwhooooo@gmail.com"
