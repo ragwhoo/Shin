@@ -56,14 +56,12 @@ export default function Home() {
       gsap.set(".hero-bg", { opacity: 0, filter: "blur(12px)" });
       gsap.set(".hero-heading", { opacity: 0, filter: "blur(12px)", y: 60 });
       gsap.set(".hero-subtitle", { opacity: 0, filter: "blur(12px)", y: 60 });
-      gsap.set(".hero-terminal", { opacity: 0, filter: "blur(12px)", y: 60 });
       gsap.set(".hero-scroll", { opacity: 0 });
 
       const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
       heroTl.to(".hero-bg", { opacity: 1, filter: "blur(0px)", duration: 1.5 })
            .to(".hero-heading", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5 }, "-=0.8")
            .to(".hero-subtitle", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5 }, "-=0.8")
-           .to(".hero-terminal", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5 }, "-=0.8")
            .to(".hero-scroll", { opacity: 1, duration: 1 }, "-=0.4");
     });
 
