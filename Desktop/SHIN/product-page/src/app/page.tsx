@@ -118,7 +118,7 @@ export default function Home() {
           items={[
             { label: "Home", href: "/" },
             { label: "Docs", href: "/docs" },
-            { label: "GitHub", href: "https://github.com/anomalyco/shin", target: "_blank", rel: "noopener noreferrer" },
+            { label: "GitHub", href: "https://github.com/ragwhoo/Shin.git", target: "_blank", rel: "noopener noreferrer" },
             { label: "npm", href: "https://www.npmjs.com/package/shin-engine", target: "_blank", rel: "noopener noreferrer" },
           ]}
           activeHref="/"
@@ -359,7 +359,7 @@ export default function Home() {
         {
           title: "Resources",
           links: [
-            { label: "GitHub", href: "https://github.com/anomalyco/shin" },
+            { label: "GitHub", href: "https://github.com/ragwhoo/Shin.git" },
             { label: "npm", href: "https://www.npmjs.com/package/shin-engine" },
             { label: "Blog", href: "#" },
             { label: "Support", href: "#" },

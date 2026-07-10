@@ -246,7 +246,7 @@ export default function DocsPage() {
             <h2 className="text-2xl font-bold text-neutral-900 mb-4">Support</h2>
             <p className="text-neutral-600 leading-relaxed">
               For issues, feature requests, or questions, visit the{" "}
-              <a href="https://github.com/anomalyco/shin" className="text-blue-500 hover:text-blue-600 underline">GitHub repository</a>{" "}
+              <a href="https://github.com/ragwhoo/Shin.git" className="text-blue-500 hover:text-blue-600 underline">GitHub repository</a>{" "}
               or reach out to <a href="mailto:ragwhooooo@gmail.com" className="text-blue-500 hover:text-blue-600 underline">ragwhooooo@gmail.com</a>.
             </p>
           </section>
