@@ -147,7 +147,8 @@
 opacity: 0;
 filter: blur(12px);
 transform: translateY(60px);
-transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), filter 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+will-change: transform, opacity, filter;
 }
 
 .reveal.visible {
@@ -157,8 +158,8 @@ transform: translateY(0);
 }
 
 .reveal-d1 { transition-delay: 0s; }
-.reveal-d2 { transition-delay: 0.15s; }
-.reveal-d3 { transition-delay: 0.3s; }
+.reveal-d2 { transition-delay: 0.1s; }
+.reveal-d3 { transition-delay: 0.2s; }
 
 .animate-caret-blink {
   animation: caret-blink 1s step-end infinite;
