@@ -66,25 +66,17 @@ export default function Home() {
            .to(".hero-terminal", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5 }, "-=0.8")
            .to(".hero-scroll", { opacity: 1, duration: 1 }, "-=0.4");
 
-      gsap.from(".why-shin-heading", {
-        opacity: 0, filter: "blur(12px)", y: 60, duration: 1.5, ease: "power3.out",
-        scrollTrigger: { trigger: ".why-shin-section", start: "top 85%", toggleActions: "play reverse play reverse" },
+      const whyTl = gsap.timeline({
+        scrollTrigger: { trigger: ".why-shin-section", start: "top bottom-=150", toggleActions: "play reverse play reverse" },
       });
+      whyTl.from(".why-shin-heading", { opacity: 0, filter: "blur(12px)", y: 60, duration: 1.2, ease: "power2.out" })
+           .from(".why-shin-card", { opacity: 0, filter: "blur(12px)", y: 60, duration: 0.8, ease: "power2.out", stagger: 0.15 }, "-=0.6");
 
-      gsap.from(".why-shin-card", {
-        opacity: 0, filter: "blur(12px)", y: 60, duration: 1, ease: "power3.out", stagger: 0.2,
-        scrollTrigger: { trigger: ".why-shin-grid", start: "top 82%", toggleActions: "play reverse play reverse" },
+      const installTl = gsap.timeline({
+        scrollTrigger: { trigger: ".install-section", start: "top bottom-=150", toggleActions: "play reverse play reverse" },
       });
-
-      gsap.from(".install-heading", {
-        opacity: 0, filter: "blur(12px)", y: 60, duration: 1.5, ease: "power3.out",
-        scrollTrigger: { trigger: ".install-section", start: "top 85%", toggleActions: "play reverse play reverse" },
-      });
-
-      gsap.from(".install-terminal", {
-        opacity: 0, filter: "blur(12px)", y: 60, duration: 1.5, ease: "power3.out", delay: 0.2,
-        scrollTrigger: { trigger: ".install-terminal", start: "top 82%", toggleActions: "play reverse play reverse" },
-      });
+      installTl.from(".install-heading", { opacity: 0, filter: "blur(12px)", y: 60, duration: 1.2, ease: "power2.out" })
+               .from(".install-terminal", { opacity: 0, filter: "blur(12px)", y: 60, duration: 1.2, ease: "power2.out" }, "-=0.6");
     });
 
     ScrollTrigger.refresh();
@@ -122,7 +114,7 @@ export default function Home() {
       </div>
 
       <div className="min-h-screen flex flex-col bg-black relative overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center pointer-events-none hero-bg" style={{ backgroundImage: "url(/bg1.png)" }} />
+        <div className="absolute inset-0 bg-cover bg-center pointer-events-none hero-bg" style={{ backgroundImage: "url(/bg2.png)" }} />
       <div className="flex-1 flex flex-col items-center px-4 pt-32 relative z-10">
         <div className="text-center mb-16">
           <h1
