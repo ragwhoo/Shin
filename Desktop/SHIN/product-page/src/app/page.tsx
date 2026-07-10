@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Lenis from "lenis";
 
+import PillNav from "@/components/ui/PillNav"
 import {
   TerminalAnimationRoot,
   TerminalAnimationContainer,
@@ -17,6 +19,18 @@ import {
 } from "@/components/ui/terminal-animation";
 
 const tabs: TabContent[] = [
+  {
+    label: "install",
+    command: "npm install -g shin-engine",
+    lines: [
+      { text: "", delay: 80 },
+      { text: "  Installing shin-engine...", color: "text-neutral-400", delay: 400 },
+      { text: "  ✓ shin-engine@0.1.0 installed globally", color: "text-[#22ff73]", delay: 300 },
+      { text: "  ✓ Command 'shin' registered in PATH", color: "text-[#22ff73]", delay: 200 },
+      { text: "", delay: 150 },
+      { text: "  Ready.", color: "text-[#32f3e9]", delay: 200 },
+    ],
+  },
   {
     label: "review",
     command: 'shin review "Implement JWT authentication"',
@@ -95,33 +109,47 @@ const tabs: TabContent[] = [
 export default function Home() {
   const [activeTab, setActiveTab] = useState(0);
 
-  return (
-    <div
-      className="min-h-screen bg-cover bg-center flex flex-col"
-      style={{ backgroundImage: "url(/bamkin.png)" }}
-    >
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/20 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto flex items-center justify-between px-4 h-14">
-          <span className="text-lg font-bold text-white/90">SHIN</span>
-          <div className="flex items-center gap-4">
-            <a href="https://github.com/anomalyco/shin" className="text-sm text-white/60 hover:text-white/90 transition-colors">GitHub</a>
-            <a href="https://www.npmjs.com/package/shin-engine" className="text-sm text-white/60 hover:text-white/90 transition-colors">npm</a>
-          </div>
-        </div>
-      </nav>
+  useEffect(() => {
+    const lenis = new Lenis({ duration: 1.2 });
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    return () => lenis.destroy();
+  }, []);
 
-      <div className="flex-1 flex flex-col items-center px-4">
-        <div className="text-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-rose-200 to-fuchsia-200">
-              SHIN
-            </span>
+  return (
+    <>
+      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4">
+        <PillNav
+          logo="/shin-logo.png"
+          logoAlt="SHIN"
+          items={[
+            { label: "Home", href: "/" },
+            { label: "GitHub", href: "https://github.com/anomalyco/shin" },
+            { label: "npm", href: "https://www.npmjs.com/package/shin-engine" },
+          ]}
+          activeHref="/"
+          baseColor="#000000"
+          pillColor="#ffffff"
+          hoveredPillTextColor="#ffffff"
+          pillTextColor="#000000"
+        />
+      </div>
+
+      <div
+        className="min-h-screen bg-cover bg-center flex flex-col"
+        style={{ backgroundImage: "url(/bamkin.png)" }}
+      >
+      <div className="flex-1 flex flex-col items-center px-4 pt-32">
+        <div className="text-center mb-16">
+          <h1
+            className="text-5xl md:text-7xl font-bold tracking-tight text-white"
+            style={{ textShadow: "0 0 20px rgba(0,0,0,0.6), 0 0 50px rgba(0,0,0,0.4), 0 0 80px rgba(0,0,0,0.2)" }}
+          >
+            SHIN
           </h1>
-          <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto">
-            AI agents have knowledge but no experience.
-            <br />
-            <span className="text-white/90 font-semibold">SHIN gives them the latter.</span>
-          </p>
         </div>
 
         <TerminalAnimationRoot
@@ -189,5 +217,6 @@ export default function Home() {
         </TerminalAnimationRoot>
       </div>
     </div>
-  );
+    <section className="min-h-screen bg-zinc-900" />
+  </>);
 }
