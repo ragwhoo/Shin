@@ -42,7 +42,8 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    requestAnimationFrame(() => window.scrollTo(0, 0));
   }, []);
 
   useEffect(() => {
