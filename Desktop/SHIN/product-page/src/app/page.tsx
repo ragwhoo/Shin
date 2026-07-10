@@ -42,6 +42,10 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const lenis = new Lenis({ duration: 1.2 });
     function raf(time: number) {
       lenis.raf(time);
