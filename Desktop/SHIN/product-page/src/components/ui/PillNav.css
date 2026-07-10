@@ -93,6 +93,7 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  outline: none;
 }
 
 .pill .hover-circle {

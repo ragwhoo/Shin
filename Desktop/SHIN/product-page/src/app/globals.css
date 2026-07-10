@@ -124,6 +124,13 @@
   html {
     @apply font-sans scroll-smooth;
   }
+  html::-webkit-scrollbar {
+    display: none;
+  }
+  html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 @keyframes caret-blink {

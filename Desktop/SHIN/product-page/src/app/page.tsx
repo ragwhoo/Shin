@@ -24,84 +24,11 @@ const tabs: TabContent[] = [
     command: "npm install -g shin-engine",
     lines: [
       { text: "", delay: 80 },
-      { text: "  Installing shin-engine...", color: "text-neutral-400", delay: 400 },
-      { text: "  ✓ shin-engine@0.1.0 installed globally", color: "text-[#22ff73]", delay: 300 },
-      { text: "  ✓ Command 'shin' registered in PATH", color: "text-[#22ff73]", delay: 200 },
+      { text: "  Installing shin-engine...", color: "text-amber-100/70", delay: 400 },
+      { text: "  ✓ shin-engine@0.1.0 installed globally", color: "text-amber-100", delay: 300 },
+      { text: "  ✓ Command 'shin' registered in PATH", color: "text-amber-100", delay: 200 },
       { text: "", delay: 150 },
-      { text: "  Ready.", color: "text-[#32f3e9]", delay: 200 },
-    ],
-  },
-  {
-    label: "review",
-    command: 'shin review "Implement JWT authentication"',
-    lines: [
-      { text: "", delay: 80 },
-      { text: "  Resolving concepts...", color: "text-neutral-400", delay: 400 },
-      { text: "  ✓ authentication", color: "text-[#22ff73]", delay: 200 },
-      { text: "  ✓ jwt", color: "text-[#22ff73]", delay: 150 },
-      { text: "  ✓ spring-security", color: "text-[#22ff73]", delay: 150 },
-      { text: "", delay: 200 },
-      { text: "  Traversing knowledge graph...", color: "text-neutral-400", delay: 400 },
-      { text: "  Found 3 relevant experiences", color: "text-[#32f3e9]", delay: 200 },
-      { text: "  Found 2 relevant principles", color: "text-[#32f3e9]", delay: 150 },
-      { text: "  Found 1 relevant architecture", color: "text-[#32f3e9]", delay: 150 },
-      { text: "", delay: 200 },
-      { text: "  Assembling evidence...", color: "text-neutral-400", delay: 300 },
-      { text: "", delay: 80 },
-      { text: "  ── Judgment Package ──", color: "text-[#b39aff]", delay: 200 },
-      { text: "  Confidence: high (0.92)", color: "text-[#22ff73]", delay: 100 },
-      { text: "  Lessons: 2", color: "text-neutral-300", delay: 100 },
-      { text: "  Warnings: 1", color: "text-yellow-400", delay: 100 },
-      { text: "  Recommendations: 3", color: "text-[#32f3e9]", delay: 100 },
-      { text: "", delay: 200 },
-      { text: "  ⚠ JwtFilter may intercept public routes", color: "text-yellow-400", delay: 150 },
-      { text: "  ✓ Use permitAll() on auth endpoints", color: "text-[#22ff73]", delay: 100 },
-      { text: "  ✓ Configure security filter chain order", color: "text-[#22ff73]", delay: 100 },
-    ],
-  },
-  {
-    label: "graph",
-    command: "shin graph",
-    lines: [
-      { text: "", delay: 80 },
-      { text: "  Engineering Brain loaded", color: "text-[#b39aff]", delay: 400 },
-      { text: "", delay: 80 },
-      { text: "  Nodes: 81", color: "text-neutral-300", delay: 200 },
-      { text: "  ├─ Concepts (20)", color: "text-[#32f3e9]", delay: 100 },
-      { text: "  ├─ Experiences (31)", color: "text-[#22ff73]", delay: 100 },
-      { text: "  ├─ Principles (14)", color: "text-[#b39aff]", delay: 100 },
-      { text: "  ├─ Decisions (10)", color: "text-yellow-400", delay: 100 },
-      { text: "  ├─ Failures (11)", color: "text-red-400", delay: 100 },
-      { text: "  └─ Architectures (5)", color: "text-[#32f3e9]", delay: 100 },
-      { text: "", delay: 200 },
-      { text: "  Edges: 456", color: "text-neutral-300", delay: 200 },
-      { text: "  ──", color: "text-neutral-600", delay: 100 },
-      { text: "  authentication ──► jwt", color: "text-[#32f3e9]", delay: 150 },
-      { text: "  jwt ──► spring-security", color: "text-[#32f3e9]", delay: 100 },
-      { text: "  deployment ──► docker", color: "text-[#32f3e9]", delay: 100 },
-      { text: "", delay: 200 },
-      { text: "  Graph traversal depth: 3", color: "text-neutral-400", delay: 200 },
-    ],
-  },
-  {
-    label: "learn",
-    command: "shin learn",
-    lines: [
-      { text: "", delay: 80 },
-      { text: "  Recording experience...", color: "text-neutral-400", delay: 400 },
-      { text: "", delay: 80 },
-      { text: "  Task: JWT 403 Fix", color: "text-neutral-300", delay: 200 },
-      { text: "  Root cause: Public routes intercepted by filter", color: "text-neutral-400", delay: 100 },
-      { text: "  Solution: Exclude public routes from filter chain", color: "text-[#22ff73]", delay: 100 },
-      { text: "", delay: 200 },
-      { text: "  Updating confidence scores...", color: "text-neutral-400", delay: 300 },
-      { text: "  exp-jwt-403 confidence: 0.85 → 0.92", color: "text-[#32f3e9]", delay: 150 },
-      { text: "  principle-public-routes confidence: 0.88 → 0.92", color: "text-[#32f3e9]", delay: 150 },
-      { text: "", delay: 200 },
-      { text: "  Graph updated. New edge:", color: "text-neutral-400", delay: 200 },
-      { text: "  jwt ──► exp-jwt-403 [strength: 0.92]", color: "text-[#b39aff]", delay: 150 },
-      { text: "", delay: 200 },
-      { text: "  ✓ Experience recorded. Engine is smarter.", color: "text-[#22ff73]", delay: 300 },
+      { text: "  Ready.", color: "text-amber-200", delay: 200 },
     ],
   },
 ];
@@ -138,18 +65,25 @@ export default function Home() {
         />
       </div>
 
-      <div
-        className="min-h-screen bg-cover bg-center flex flex-col"
-        style={{ backgroundImage: "url(/bamkin.png)" }}
-      >
+      <div className="min-h-screen flex flex-col relative bg-black">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-blue-500/30 blur-[150px]" />
+          <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-pink-500/25 blur-[140px]" />
+          <div className="absolute bottom-0 left-1/3 w-[600px] h-[600px] rounded-full bg-amber-100/35 blur-[150px]" />
+        </div>
       <div className="flex-1 flex flex-col items-center px-4 pt-32">
         <div className="text-center mb-16">
           <h1
-            className="text-5xl md:text-7xl font-bold tracking-tight text-white"
-            style={{ textShadow: "0 0 20px rgba(0,0,0,0.6), 0 0 50px rgba(0,0,0,0.4), 0 0 80px rgba(0,0,0,0.2)" }}
+            className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight text-white leading-[1.1]"
           >
-            SHIN
+            Engineering,{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-amber-100 to-blue-400">
+              Remembered.
+            </span>
           </h1>
+          <p className="mt-4 text-lg md:text-xl text-white/60 max-w-xl mx-auto">
+            Persistent engineering judgment for AI coding agents.
+          </p>
         </div>
 
         <TerminalAnimationRoot
@@ -189,7 +123,7 @@ export default function Home() {
 
               <TerminalAnimationContent className="flex-1 overflow-y-hidden">
                 <div className="flex items-center gap-2 text-sm text-zinc-400 mb-1">
-                  <span className="text-[#22ff73]">$</span>
+                  <span className="text-amber-200">$</span>
                   <TerminalAnimationCommandBar />
                 </div>
                 <TerminalAnimationOutput
@@ -208,7 +142,7 @@ export default function Home() {
                   }}
                 />
                 <TerminalAnimationTrailingPrompt>
-                  <span className="text-[#22ff73] text-sm">$</span>
+                  <span className="text-amber-200 text-sm">$</span>
                   <TerminalAnimationBlinkingCursor />
                 </TerminalAnimationTrailingPrompt>
               </TerminalAnimationContent>
@@ -217,6 +151,6 @@ export default function Home() {
         </TerminalAnimationRoot>
       </div>
     </div>
-    <section className="min-h-screen bg-zinc-900" />
+    <section className="min-h-screen bg-white" />
   </>);
 }
