@@ -59,22 +59,33 @@ function isRunning() {
   } catch { return false; }
 }
 
+function installJava() {
+  try {
+    execSync("winget install --id EclipseAdoptium.Temurin.21.JDK --accept-package-agreements --silent 2>&1", { encoding: "utf-8", timeout: 120000 });
+    ok("Java 21 installed via winget");
+  } catch {
+    log("  Auto-install failed. Install manually from: https://adoptium.net/");
+    process.exit(1);
+  }
+}
+
 async function ensureSetup() {
   if (existsSync(JAR)) return true;
 
   step("SHIN first-time setup");
 
-  // Check Java
+  // Check/Install Java
   try {
     const v = execSync("java -version 2>&1", { encoding: "utf-8" });
     if (!v.match(/"(\d+)/) || parseInt(v.match(/"(\d+)/)[1]) < 21) {
-      log("  Java 21+ required. Install from: https://adoptium.net/");
-      return false;
+      log("  Java version too old. Installing Java 21...");
+      installJava();
+    } else {
+      ok("Java found");
     }
-    ok("Java found");
   } catch {
-    log("  Java 21+ required. Install from: https://adoptium.net/");
-    return false;
+    log("  Java not found. Installing Java 21...");
+    installJava();
   }
 
   // Download EE
