@@ -137,7 +137,7 @@ export default function Home() {
             </span>
           </h1>
           <p className="mt-4 text-lg md:text-xl text-white max-w-xl mx-auto hero-subtitle">
-            Persistent engineering judgment for AI coding agents.
+            SHIN: Persistent engineering judgment for AI coding agents.
           </p>
           <a
             href="#install"
