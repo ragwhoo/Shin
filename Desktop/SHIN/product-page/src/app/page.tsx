@@ -317,13 +317,10 @@ export default function Home() {
       </div>
     </section>
     <Footer10
-      bannerTagline="AI-Native Engineering"
-      bannerHeading="Experience the future of AI-assisted development."
-      bannerCtaLabel="Get Started"
-      bannerCtaHref="#install"
+      bannerBackgroundImage="/bg2.png"
       contactLabel="Reach out :"
-      contactEmail="hello@shin.engine"
-      contactEmailHref="mailto:hello@shin.engine"
+      contactEmail="ragwhooooo@gmail.com"
+      contactEmailHref="mailto:ragwhooooo@gmail.com"
       description="SHIN is the engineering memory layer for AI coding agents. Every review, every fix, every lesson learned — preserved and actionable."
       newsletterPlaceholder="Your email"
       brandName="SHIN"
@@ -335,7 +332,6 @@ export default function Home() {
             { label: "Overview", href: "#" },
             { label: "Features", href: "#" },
             { label: "Documentation", href: "#" },
-            { label: "Pricing", href: "#" },
           ],
         },
         {
@@ -345,15 +341,6 @@ export default function Home() {
             { label: "npm", href: "https://www.npmjs.com/package/shin-engine" },
             { label: "Blog", href: "#" },
             { label: "Support", href: "#" },
-          ],
-        },
-        {
-          title: "Company",
-          links: [
-            { label: "About", href: "#" },
-            { label: "Careers", href: "#" },
-            { label: "Press", href: "#" },
-            { label: "Contact", href: "#" },
           ],
         },
         {
