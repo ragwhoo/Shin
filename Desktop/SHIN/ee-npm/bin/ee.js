@@ -25,16 +25,27 @@ function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 function download(url, dest) {
   return new Promise((resolve, reject) => {
-    const file = require("fs").createWriteStream(dest);
+    const fs = require("fs");
+    const file = fs.createWriteStream(dest);
     const proto = url.startsWith("https") ? https : http;
     proto.get(url, res => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        file.close();
+        fs.unlink(dest, () => {});
         download(res.headers.location, dest).then(resolve).catch(reject);
         return;
       }
       res.pipe(file);
-      file.on("finish", () => { file.close(); resolve(); });
-    }).on("error", reject);
+      file.on("finish", () => {
+        file.close();
+        // Small delay to ensure OS releases file lock
+        setTimeout(resolve, 500);
+      });
+    }).on("error", err => {
+      file.close();
+      fs.unlink(dest, () => {});
+      reject(err);
+    });
   });
 }
 
@@ -51,7 +62,7 @@ function isRunning() {
 async function ensureSetup() {
   if (existsSync(JAR)) return true;
 
-  step("First-time setup");
+  step("SHIN first-time setup");
 
   // Check Java
   try {
@@ -67,7 +78,7 @@ async function ensureSetup() {
   }
 
   // Download EE
-  step("Downloading EE (" + RELEASE_URL + ")");
+  step("Downloading SHIN (" + RELEASE_URL + ")");
   if (!existsSync(EE_HOME)) mkdirSync(EE_HOME, { recursive: true });
   const zipPath = join(os.tmpdir(), "ee.zip");
   try {
@@ -78,14 +89,14 @@ async function ensureSetup() {
     return false;
   }
 
-  // Extract (use PowerShell for Windows zip extraction)
+  // Extract
   step("Extracting...");
   try {
     execSync(
-      `powershell -Command "Expand-Archive -Path '${zipPath}' -DestinationPath '${EE_HOME}' -Force"`,
+      `powershell -Command "Start-Sleep 1; Expand-Archive -Path '${zipPath}' -DestinationPath '${EE_HOME}' -Force"`,
       { encoding: "utf-8", timeout: 30000 }
     );
-    require("fs").unlinkSync(zipPath);
+    execSync(`del "${zipPath}"`, { encoding: "utf-8", timeout: 5000 });
     ok("Extracted to " + EE_HOME);
   } catch (e) {
     log("  Extraction failed: " + e.message);
@@ -112,12 +123,18 @@ async function ensureSetup() {
 }
 
 async function main() {
-  if (!cmd || cmd === "start") {
-    if (isRunning()) { log("EE is already running on port " + PORT); return; }
+  if (!cmd) {
+    log("Usage: shin <command>");
+    log("Run 'shin --help' for options");
+    return;
+  }
+
+  if (cmd === "start") {
+    if (isRunning()) { log("SHIN is already running on port " + PORT); return; }
     const setup = await ensureSetup();
     if (!setup) { process.exit(1); }
 
-    step("Starting EE backend...");
+    step("Starting SHIN backend...");
     const env = { ...process.env, ENGINEERING_BRAIN_PATH: BRAIN_DIR };
     const child = spawn("java", [
       "-jar", JAR,
@@ -128,7 +145,7 @@ async function main() {
     for (let i = 0; i < 30; i++) {
       await sleep(1000);
       if (isRunning()) {
-        log("EE ready on port " + PORT);
+        log("SHIN ready on port " + PORT);
         log("\nTell your OpenCode agent: 'load the engineering-experience-engine skill'");
         return;
       }
@@ -143,17 +160,24 @@ async function main() {
         `powershell -Command "$conn = Get-NetTCPConnection -LocalPort ${PORT} -ErrorAction SilentlyContinue; if ($conn) { $pids = $conn.OwningProcess; $pids | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }; Write-Output 'stopped' } else { Write-Output 'not running' }"`,
         { encoding: "utf-8", timeout: 10000 }
       );
-      log("EE stopped");
-    } catch { log("EE not running"); }
+      log("SHIN stopped");
+    } catch { log("SHIN not running"); }
     return;
   }
 
   if (cmd === "status") {
     if (isRunning()) {
-      log("EE is running on port " + PORT);
+      log("SHIN is running on port " + PORT);
     } else {
-      log("EE is not running");
+      log("SHIN is not running");
     }
+    return;
+  }
+
+  if (cmd === "view") {
+    if (!isRunning()) { log("SHIN is not running. Run 'shin start' first."); return; }
+    execSync("powershell -Command \"Start-Process 'http://localhost:" + PORT + "'\"", { timeout: 5000 });
+    log("Opening SHIN dashboard...");
     return;
   }
 
@@ -161,14 +185,15 @@ async function main() {
     log("Usage: shin <command>");
     log("");
     log("Commands:");
-    log("  shin start    Start the EE backend (first run downloads + installs)");
-    log("  shin stop     Stop the EE backend");
-    log("  shin status   Check if EE is running");
+    log("  shin start    Start the SHIN backend (first run downloads + installs)");
+    log("  shin stop     Stop the SHIN backend");
+    log("  shin status   Check if SHIN is running");
+    log("  shin view     Open the SHIN dashboard in browser");
     return;
   }
 
   log("Unknown command: " + cmd);
-  log("Run 'ee --help' for usage");
+  log("Run 'shin --help' for usage");
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
