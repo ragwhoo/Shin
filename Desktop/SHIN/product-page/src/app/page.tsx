@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import PillNav from "@/components/ui/PillNav"
+import { Footer10 } from "@/components/watermelon-ui/footer-10"
 import {
   TerminalAnimationRoot,
   TerminalAnimationContainer,
@@ -57,39 +58,32 @@ export default function Home() {
       gsap.set(".hero-subtitle", { opacity: 0, filter: "blur(12px)", y: 60 });
       gsap.set(".hero-terminal", { opacity: 0, filter: "blur(12px)", y: 60 });
       gsap.set(".hero-scroll", { opacity: 0 });
-      gsap.set(".why-shin-heading", { opacity: 0, filter: "blur(12px)", y: 60 });
-      gsap.set(".why-shin-card", { opacity: 0, filter: "blur(12px)", y: 60 });
-      gsap.set(".install-heading", { opacity: 0, filter: "blur(12px)", y: 60 });
-      gsap.set(".install-terminal", { opacity: 0, filter: "blur(12px)", y: 60 });
 
-      gsap.to(".hero-bg", { opacity: 1, filter: "blur(0px)", duration: 1.5, ease: "power3.out" });
+      const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      heroTl.to(".hero-bg", { opacity: 1, filter: "blur(0px)", duration: 1.5 })
+           .to(".hero-heading", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5 }, "-=0.8")
+           .to(".hero-subtitle", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5 }, "-=0.8")
+           .to(".hero-terminal", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5 }, "-=0.8")
+           .to(".hero-scroll", { opacity: 1, duration: 1 }, "-=0.4");
 
-      gsap.to(".hero-heading", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5, ease: "power3.out", delay: 0.1 });
-
-      gsap.to(".hero-subtitle", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5, ease: "power3.out", delay: 0.3 });
-
-      gsap.to(".hero-terminal", { opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5, ease: "power3.out", delay: 0.5 });
-
-      gsap.to(".hero-scroll", { opacity: 1, duration: 1, ease: "power3.out", delay: 1.2 });
-
-      gsap.to(".why-shin-heading", {
-        opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5, ease: "power3.out",
-        scrollTrigger: { trigger: ".why-shin-section", start: "top 80%", toggleActions: "play reverse play reverse" },
+      gsap.from(".why-shin-heading", {
+        opacity: 0, filter: "blur(12px)", y: 60, duration: 1.5, ease: "power3.out",
+        scrollTrigger: { trigger: ".why-shin-section", start: "top 85%", toggleActions: "play reverse play reverse" },
       });
 
-      gsap.to(".why-shin-card", {
-        opacity: 1, filter: "blur(0px)", y: 0, duration: 1, ease: "power3.out", stagger: 0.15,
-        scrollTrigger: { trigger: ".why-shin-section", start: "top 75%", toggleActions: "play reverse play reverse" },
+      gsap.from(".why-shin-card", {
+        opacity: 0, filter: "blur(12px)", y: 60, duration: 1, ease: "power3.out", stagger: 0.2,
+        scrollTrigger: { trigger: ".why-shin-grid", start: "top 82%", toggleActions: "play reverse play reverse" },
       });
 
-      gsap.to(".install-heading", {
-        opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5, ease: "power3.out",
-        scrollTrigger: { trigger: ".install-section", start: "top 80%", toggleActions: "play reverse play reverse" },
+      gsap.from(".install-heading", {
+        opacity: 0, filter: "blur(12px)", y: 60, duration: 1.5, ease: "power3.out",
+        scrollTrigger: { trigger: ".install-section", start: "top 85%", toggleActions: "play reverse play reverse" },
       });
 
-      gsap.to(".install-terminal", {
-        opacity: 1, filter: "blur(0px)", y: 0, duration: 1.5, ease: "power3.out", delay: 0.2,
-        scrollTrigger: { trigger: ".install-section", start: "top 75%", toggleActions: "play reverse play reverse" },
+      gsap.from(".install-terminal", {
+        opacity: 0, filter: "blur(12px)", y: 60, duration: 1.5, ease: "power3.out", delay: 0.2,
+        scrollTrigger: { trigger: ".install-terminal", start: "top 82%", toggleActions: "play reverse play reverse" },
       });
     });
 
@@ -99,7 +93,7 @@ export default function Home() {
 
   useEffect(() => {
     const lenis = new Lenis({ duration: 1.2 });
-    lenis.on("scroll", () => ScrollTrigger.update());
+    lenis.on("scroll", ScrollTrigger.update);
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -228,7 +222,7 @@ export default function Home() {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8 why-shin-grid">
           {[
             {
               title: "Persistent Memory",
@@ -322,5 +316,55 @@ export default function Home() {
         </div>
       </div>
     </section>
+    <Footer10
+      bannerTagline="AI-Native Engineering"
+      bannerHeading="Experience the future of AI-assisted development."
+      bannerCtaLabel="Get Started"
+      bannerCtaHref="#install"
+      contactLabel="Reach out :"
+      contactEmail="hello@shin.engine"
+      contactEmailHref="mailto:hello@shin.engine"
+      description="SHIN is the engineering memory layer for AI coding agents. Every review, every fix, every lesson learned — preserved and actionable."
+      newsletterPlaceholder="Your email"
+      brandName="SHIN"
+      copyright="© 2026 SHIN. All rights reserved."
+      linkColumns={[
+        {
+          title: "Product",
+          links: [
+            { label: "Overview", href: "#" },
+            { label: "Features", href: "#" },
+            { label: "Documentation", href: "#" },
+            { label: "Pricing", href: "#" },
+          ],
+        },
+        {
+          title: "Resources",
+          links: [
+            { label: "GitHub", href: "https://github.com/anomalyco/shin" },
+            { label: "npm", href: "https://www.npmjs.com/package/shin-engine" },
+            { label: "Blog", href: "#" },
+            { label: "Support", href: "#" },
+          ],
+        },
+        {
+          title: "Company",
+          links: [
+            { label: "About", href: "#" },
+            { label: "Careers", href: "#" },
+            { label: "Press", href: "#" },
+            { label: "Contact", href: "#" },
+          ],
+        },
+        {
+          title: "Legal",
+          links: [
+            { label: "Privacy", href: "#" },
+            { label: "Terms", href: "#" },
+            { label: "Cookies", href: "#" },
+          ],
+        },
+      ]}
+    />
   </>);
 }
