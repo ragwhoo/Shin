@@ -1,0 +1,12 @@
+id: concept-api-design
+title: API Design
+synonyms:
+  - rest-api
+  - endpoints
+  - api-contract
+related_concepts:
+  - cors
+  - authentication
+  - error-handling
+tags:
+  - architecture

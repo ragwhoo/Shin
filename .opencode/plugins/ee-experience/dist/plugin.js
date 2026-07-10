@@ -41,7 +41,7 @@ function autoStart() {
 function queuePendingLearning(sessionId) {
   const task = STATE.pendingTasks.get(sessionId) || "unknown task";
   const filePath = join(PENDING_LEARN_DIR, "pending-learn.yml");
-  const entry = `\n# Pending learning from session ${sessionId} (${new Date().toISOString()})\n# Task: ${task}\n# The session completed implementation without extracting learnings.\n# Review the work done and submit learnings via:\n#   curl -X POST http://localhost:8080/api/v1/learn ...\n`;
+  const entry = `\n# Pending learning from session ${sessionId} (${new Date().toISOString()})\n# Task: ${task}\n# The session completed implementation without extracting learnings.\n# Write a .md file to engineering-brain/learnings/ with what you learned.\n`;
   try {
     if (!existsSync(PENDING_LEARN_DIR)) mkdirSync(PENDING_LEARN_DIR, { recursive: true });
     appendFileSync(filePath, entry, "utf-8");

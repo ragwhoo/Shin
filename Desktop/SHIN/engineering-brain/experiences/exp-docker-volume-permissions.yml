@@ -1,0 +1,13 @@
+id: exp-docker-volume-permissions
+title: Docker Volume Permission Issues
+concept: concept-docker
+problem: Application running in Docker container could not write to mounted volumes resulting in permission denied errors
+root_cause: Container user ID did not match the host user ID for the mounted volume directory
+solution: Aligned container user UID with host user UID using the --user flag and proper Dockerfile user setup
+outcome: Success
+confidence: 0.88
+usage_count: 7
+tags:
+  - docker
+  - volumes
+  - permissions

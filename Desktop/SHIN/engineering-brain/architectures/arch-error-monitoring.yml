@@ -1,0 +1,16 @@
+id: arch-error-monitoring
+title: Centralized Error Monitoring
+concept: concept-error-handling
+components:
+  - Sentry SDK (error capture)
+  - Global ExceptionHandler (server errors)
+  - React ErrorBoundary (client errors)
+  - Structured log aggregation (ELK stack)
+  - Alerting pipeline (webhook notifications)
+used_in:
+  - shin-observability
+confidence: 0.87
+tags:
+  - error-handling
+  - monitoring
+  - observability

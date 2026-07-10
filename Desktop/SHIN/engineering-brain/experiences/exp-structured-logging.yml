@@ -1,0 +1,13 @@
+id: exp-structured-logging
+title: Structured Logging Setup
+concept: concept-logging
+problem: Logs were plain text making it impossible to search, filter, or aggregate them effectively in the logging dashboard
+root_cause: Application used simple console.log statements with no standard format, correlation IDs, or log levels
+solution: Implemented structured JSON logging with correlation IDs, log levels, and integrated with the ELK stack
+outcome: Success
+confidence: 0.93
+usage_count: 6
+tags:
+  - logging
+  - structured-logging
+  - elk

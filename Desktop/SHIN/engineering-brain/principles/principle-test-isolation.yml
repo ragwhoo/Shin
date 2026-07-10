@@ -1,0 +1,9 @@
+id: principle-test-isolation
+title: Tests Must Be Independent
+concept: concept-testing
+lesson: Each test must set up its own data, run independently, and clean up after itself to prevent flaky test suites where test ordering affects outcomes.
+confidence: 0.95
+tags:
+  - testing
+  - quality
+  - automation

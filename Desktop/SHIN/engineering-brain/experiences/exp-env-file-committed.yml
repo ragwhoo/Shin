@@ -1,0 +1,14 @@
+id: exp-env-file-committed
+title: .env File Committed to Git
+concept: concept-git-workflow
+problem: Production secrets including API keys and database credentials were accidentally committed to the repository
+root_cause: .env file was not in .gitignore and developer committed environment config without review
+solution: Added .env to .gitignore, rotated compromised secrets, and set up a pre-commit hook to block sensitive files
+outcome: Success
+confidence: 0.98
+usage_count: 8
+tags:
+  - git
+  - security
+  - secrets
+  - gitignore

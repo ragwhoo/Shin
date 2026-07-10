@@ -1,0 +1,456 @@
+relations:
+  # === Authentication cluster ===
+  - source: concept-authentication
+    type: RELATES_TO
+    target: concept-jwt
+    weight: 0.95
+  - source: concept-authentication
+    type: RELATES_TO
+    target: concept-spring-security
+    weight: 0.90
+  - source: concept-authentication
+    type: RELATES_TO
+    target: concept-cors
+    weight: 0.60
+  - source: concept-authentication
+    type: RELATES_TO
+    target: concept-authorization
+    weight: 0.85
+  - source: concept-authentication
+    type: RELATES_TO
+    target: exp-jwt-403
+    weight: 0.90
+  - source: concept-authentication
+    type: RELATES_TO
+    target: principle-public-routes
+    weight: 0.85
+  - source: concept-authentication
+    type: RELATES_TO
+    target: decision-jwt-vs-sessions
+    weight: 0.80
+  - source: concept-authentication
+    type: RELATES_TO
+    target: arch-spring-jwt
+    weight: 0.88
+  - source: concept-authentication
+    type: RELATES_TO
+    target: exp-oauth2-setup
+    weight: 0.75
+  - source: concept-authentication
+    type: RELATES_TO
+    target: failure-public-endpoint-exposed
+    weight: 0.82
+  - source: concept-authentication
+    type: RELATES_TO
+    target: principle-stateless-auth
+    weight: 0.78
+  - source: exp-jwt-403
+    type: DERIVED_FROM
+    target: principle-public-routes
+    weight: 0.85
+  - source: exp-oauth2-setup
+    type: DERIVED_FROM
+    target: principle-stateless-auth
+    weight: 0.70
+  - source: failure-public-endpoint-exposed
+    type: DERIVED_FROM
+    target: principle-public-routes
+    weight: 0.80
+
+  # === JWT cluster ===
+  - source: concept-jwt
+    type: RELATES_TO
+    target: exp-jwt-403
+    weight: 0.90
+  - source: concept-jwt
+    type: RELATES_TO
+    target: exp-jwt-token-expired
+    weight: 0.85
+  - source: concept-jwt
+    type: RELATES_TO
+    target: arch-spring-jwt
+    weight: 0.95
+  - source: concept-jwt
+    type: RELATES_TO
+    target: decision-jwt-vs-sessions
+    weight: 0.88
+  - source: concept-jwt
+    type: RELATES_TO
+    target: principle-public-routes
+    weight: 0.75
+  - source: decision-jwt-vs-sessions
+    type: APPLIES_TO
+    target: arch-spring-jwt
+    weight: 0.85
+
+  # === Deployment cluster ===
+  - source: concept-deployment
+    type: RELATES_TO
+    target: concept-docker
+    weight: 0.85
+  - source: concept-deployment
+    type: RELATES_TO
+    target: concept-environment-config
+    weight: 0.80
+  - source: concept-deployment
+    type: RELATES_TO
+    target: exp-deployment-env-vars
+    weight: 0.88
+  - source: concept-deployment
+    type: RELATES_TO
+    target: principle-env-validation
+    weight: 0.86
+  - source: concept-deployment
+    type: RELATES_TO
+    target: failure-prod-env-missing
+    weight: 0.90
+  - source: concept-deployment
+    type: RELATES_TO
+    target: exp-cache-invalidation
+    weight: 0.70
+  - source: concept-deployment
+    type: RELATES_TO
+    target: decision-nginx-vs-caddy
+    weight: 0.75
+  - source: decision-nginx-vs-caddy
+    type: APPLIES_TO
+    target: arch-docker-prod-deploy
+    weight: 0.80
+  - source: exp-deployment-env-vars
+    type: DERIVED_FROM
+    target: principle-env-validation
+    weight: 0.85
+  - source: failure-prod-env-missing
+    type: DERIVED_FROM
+    target: principle-env-validation
+    weight: 0.90
+
+  # === Git Workflow cluster ===
+  - source: concept-git-workflow
+    type: RELATES_TO
+    target: exp-agent-repo-reset
+    weight: 0.92
+  - source: concept-git-workflow
+    type: RELATES_TO
+    target: principle-wip-commits
+    weight: 0.90
+  - source: concept-git-workflow
+    type: RELATES_TO
+    target: failure-agent-reset
+    weight: 0.95
+  - source: concept-git-workflow
+    type: RELATES_TO
+    target: exp-env-file-committed
+    weight: 0.75
+  - source: exp-agent-repo-reset
+    type: DERIVED_FROM
+    target: principle-wip-commits
+    weight: 0.90
+  - source: failure-agent-reset
+    type: DERIVED_FROM
+    target: principle-wip-commits
+    weight: 0.95
+
+  # === Docker cluster ===
+  - source: concept-docker
+    type: RELATES_TO
+    target: exp-docker-compose-networking
+    weight: 0.85
+  - source: concept-docker
+    type: RELATES_TO
+    target: exp-docker-volume-permissions
+    weight: 0.82
+  - source: concept-docker
+    type: RELATES_TO
+    target: arch-docker-prod-deploy
+    weight: 0.90
+  - source: concept-docker
+    type: RELATES_TO
+    target: decision-docker-swarm-vs-k8s
+    weight: 0.80
+  - source: concept-docker
+    type: RELATES_TO
+    target: failure-docker-compose-password
+    weight: 0.88
+  - source: failure-docker-compose-password
+    type: DERIVED_FROM
+    target: principle-env-validation
+    weight: 0.75
+
+  # === React Routing cluster ===
+  - source: concept-react-routing
+    type: RELATES_TO
+    target: exp-react-router-refresh
+    weight: 0.87
+  - source: concept-react-routing
+    type: RELATES_TO
+    target: exp-nginx-refresh-404
+    weight: 0.85
+  - source: concept-react-routing
+    type: RELATES_TO
+    target: arch-react-spa
+    weight: 0.90
+  - source: concept-react-routing
+    type: RELATES_TO
+    target: decision-react-vs-vue
+    weight: 0.78
+  - source: decision-react-vs-vue
+    type: APPLIES_TO
+    target: arch-react-spa
+    weight: 0.80
+
+  # === CORS cluster ===
+  - source: concept-cors
+    type: RELATES_TO
+    target: exp-cors-config
+    weight: 0.90
+  - source: concept-cors
+    type: RELATES_TO
+    target: exp-cors-preflight-failure
+    weight: 0.85
+  - source: concept-cors
+    type: RELATES_TO
+    target: principle-cors-whitelist
+    weight: 0.88
+  - source: concept-cors
+    type: RELATES_TO
+    target: failure-cors-misconfig-crash
+    weight: 0.92
+  - source: exp-cors-config
+    type: DERIVED_FROM
+    target: principle-cors-whitelist
+    weight: 0.80
+  - source: failure-cors-misconfig-crash
+    type: DERIVED_FROM
+    target: principle-cors-whitelist
+    weight: 0.85
+
+  # === API Design cluster ===
+  - source: concept-api-design
+    type: RELATES_TO
+    target: exp-api-rate-limiting
+    weight: 0.80
+  - source: concept-api-design
+    type: RELATES_TO
+    target: exp-api-version-mismatch
+    weight: 0.85
+  - source: concept-api-design
+    type: RELATES_TO
+    target: decision-rest-vs-graphql
+    weight: 0.82
+  - source: concept-api-design
+    type: RELATES_TO
+    target: arch-three-tier-api
+    weight: 0.88
+  - source: concept-api-design
+    type: RELATES_TO
+    target: failure-api-breaking-change
+    weight: 0.90
+  - source: concept-api-design
+    type: RELATES_TO
+    target: principle-api-versioning
+    weight: 0.92
+  - source: decision-rest-vs-graphql
+    type: APPLIES_TO
+    target: arch-three-tier-api
+    weight: 0.85
+  - source: failure-api-breaking-change
+    type: DERIVED_FROM
+    target: principle-api-versioning
+    weight: 0.90
+  - source: exp-api-version-mismatch
+    type: DERIVED_FROM
+    target: principle-api-versioning
+    weight: 0.80
+
+  # === Database cluster ===
+  - source: concept-database
+    type: RELATES_TO
+    target: exp-db-migration-failed
+    weight: 0.85
+  - source: concept-database
+    type: RELATES_TO
+    target: exp-db-connection-pooling
+    weight: 0.80
+  - source: concept-database
+    type: RELATES_TO
+    target: decision-sql-vs-nosql
+    weight: 0.88
+  - source: concept-database
+    type: RELATES_TO
+    target: failure-db-migration-dataloss
+    weight: 0.92
+  - source: concept-database
+    type: RELATES_TO
+    target: principle-db-pool-sizing
+    weight: 0.78
+  - source: failure-db-migration-dataloss
+    type: DERIVED_FROM
+    target: principle-api-versioning
+    weight: 0.60
+
+  # === State Management cluster ===
+  - source: concept-state-management
+    type: RELATES_TO
+    target: exp-state-reset-on-nav
+    weight: 0.85
+  - source: concept-state-management
+    type: RELATES_TO
+    target: decision-redux-vs-zustand
+    weight: 0.82
+  - source: concept-state-management
+    type: RELATES_TO
+    target: failure-state-lost-on-refresh
+    weight: 0.90
+
+  # === Frontend Build cluster ===
+  - source: concept-frontend-build
+    type: RELATES_TO
+    target: exp-webpack-build-failures
+    weight: 0.80
+  - source: concept-frontend-build
+    type: RELATES_TO
+    target: exp-nextjs-app-doc-error
+    weight: 0.85
+  - source: concept-frontend-build
+    type: RELATES_TO
+    target: decision-vite-vs-webpack
+    weight: 0.88
+  - source: exp-nextjs-app-doc-error
+    type: DERIVED_FROM
+    target: principle-app-router-compat
+    weight: 0.85
+
+  # === Payment / Razorpay cluster ===
+  - source: concept-razorpay
+    type: RELATES_TO
+    target: exp-razorpay-integration
+    weight: 0.90
+  - source: concept-razorpay
+    type: RELATES_TO
+    target: exp-razorpay-webhook-verification
+    weight: 0.85
+  - source: concept-razorpay
+    type: RELATES_TO
+    target: decision-razorpay-vs-stripe
+    weight: 0.88
+  - source: concept-payment-integration
+    type: RELATES_TO
+    target: exp-payment-refund-flow
+    weight: 0.85
+  - source: concept-payment-integration
+    type: RELATES_TO
+    target: concept-razorpay
+    weight: 0.80
+
+  # === Error Handling cluster ===
+  - source: concept-error-handling
+    type: RELATES_TO
+    target: exp-error-boundary-missing
+    weight: 0.88
+  - source: concept-error-handling
+    type: RELATES_TO
+    target: exp-uncaught-exception-crash
+    weight: 0.85
+  - source: concept-error-handling
+    type: RELATES_TO
+    target: arch-error-monitoring
+    weight: 0.90
+  - source: concept-error-handling
+    type: RELATES_TO
+    target: principle-error-boundaries
+    weight: 0.87
+
+  # === Logging cluster ===
+  - source: concept-logging
+    type: RELATES_TO
+    target: exp-logging-spam
+    weight: 0.80
+  - source: concept-logging
+    type: RELATES_TO
+    target: exp-structured-logging
+    weight: 0.85
+  - source: concept-logging
+    type: RELATES_TO
+    target: principle-structured-logging
+    weight: 0.88
+  - source: concept-logging
+    type: RELATES_TO
+    target: decision-structured-vs-plain-logging
+    weight: 0.90
+  - source: concept-logging
+    type: RELATES_TO
+    target: failure-logging-pii
+    weight: 0.92
+  - source: exp-structured-logging
+    type: DERIVED_FROM
+    target: principle-structured-logging
+    weight: 0.80
+  - source: failure-logging-pii
+    type: DERIVED_FROM
+    target: principle-structured-logging
+    weight: 0.85
+
+  # === Testing cluster ===
+  - source: concept-testing
+    type: RELATES_TO
+    target: exp-test-flaky
+    weight: 0.85
+  - source: concept-testing
+    type: RELATES_TO
+    target: exp-test-data-cleanup
+    weight: 0.80
+  - source: concept-testing
+    type: RELATES_TO
+    target: principle-test-isolation
+    weight: 0.90
+  - source: concept-testing
+    type: RELATES_TO
+    target: failure-flaky-test-false-pass
+    weight: 0.88
+  - source: failure-flaky-test-false-pass
+    type: DERIVED_FROM
+    target: principle-test-isolation
+    weight: 0.85
+
+  # === Single-connection nodes ===
+  - source: concept-environment-config
+    type: RELATES_TO
+    target: exp-env-file-committed
+    weight: 0.85
+  - source: concept-spring-security
+    type: RELATES_TO
+    target: exp-spring-security-config
+    weight: 0.90
+  - source: concept-gsap-animation
+    type: RELATES_TO
+    target: exp-gsap-scroll-issues
+    weight: 0.88
+  - source: concept-gsap-animation
+    type: RELATES_TO
+    target: exp-gsap-mouse-parallax
+    weight: 0.80
+  - source: exp-gsap-mouse-parallax
+    type: DERIVED_FROM
+    target: principle-gsap-parallax-scale
+    weight: 0.88
+  - source: concept-frontend-build
+    type: RELATES_TO
+    target: exp-styled-jsx-fouc
+    weight: 0.90
+  - source: concept-frontend-build
+    type: RELATES_TO
+    target: failure-logo-filter-invert
+    weight: 0.75
+  - source: exp-styled-jsx-fouc
+    type: DERIVED_FROM
+    target: principle-critical-visibility-inline
+    weight: 0.95
+  - source: failure-logo-filter-invert
+    type: DERIVED_FROM
+    target: principle-critical-visibility-inline
+    weight: 0.80
+  - source: concept-authorization
+    type: RELATES_TO
+    target: concept-authentication
+    weight: 0.85

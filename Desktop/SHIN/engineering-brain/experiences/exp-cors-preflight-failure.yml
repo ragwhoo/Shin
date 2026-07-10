@@ -1,0 +1,13 @@
+id: exp-cors-preflight-failure
+title: CORS Preflight OPTIONS Failure
+concept: concept-cors
+problem: API calls with custom headers failed with CORS errors specifically for PUT and DELETE requests
+root_cause: Browser sent OPTIONS preflight requests but the backend did not handle OPTIONS method for CORS properly
+solution: Added explicit handling of OPTIONS requests in the CORS filter and returned proper CORS headers for preflight responses
+outcome: Success
+confidence: 0.95
+usage_count: 6
+tags:
+  - cors
+  - preflight
+  - options

@@ -1,0 +1,13 @@
+id: decision-razorpay-vs-stripe
+title: Razorpay over Stripe for India
+concept: concept-razorpay
+reason: Razorpay supports Indian payment methods (UPI, Net Banking, EMI) natively and offers better pricing for the Indian market.
+alternatives:
+  - Stripe with India support
+  - PayPal with INR conversion
+outcome: Successful
+confidence: 0.94
+tags:
+  - payments
+  - razorpay
+  - india

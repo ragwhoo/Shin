@@ -1,0 +1,9 @@
+id: principle-env-validation
+title: Validate Environment at Startup
+concept: concept-deployment
+lesson: Validate all required environment variables at application startup to fail fast rather than at runtime when the missing variable is first accessed.
+confidence: 0.97
+tags:
+  - deployment
+  - configuration
+  - fail-fast

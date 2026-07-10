@@ -1,0 +1,9 @@
+id: principle-error-boundaries
+title: Always Wrap Root Components in Error Boundaries
+concept: concept-error-handling
+lesson: Wrap every top-level route or page component in an error boundary to prevent a single uncaught JavaScript error from crashing the entire application.
+confidence: 0.94
+tags:
+  - react
+  - error-handling
+  - ui

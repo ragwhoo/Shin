@@ -1,0 +1,10 @@
+id: concept-gsap-animation
+title: GSAP Animation
+synonyms:
+  - greensock
+  - scroll-trigger
+related_concepts:
+  - react-routing
+  - frontend-build
+tags:
+  - frontend

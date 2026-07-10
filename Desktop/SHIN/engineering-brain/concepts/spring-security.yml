@@ -1,0 +1,12 @@
+id: concept-spring-security
+title: Spring Security
+synonyms:
+  - spring-boot-security
+  - security-chain
+related_concepts:
+  - authentication
+  - authorization
+  - jwt
+tags:
+  - java
+  - spring

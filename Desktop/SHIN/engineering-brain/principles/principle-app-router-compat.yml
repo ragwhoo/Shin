@@ -1,0 +1,9 @@
+id: principle-app-router-compat
+title: Use Latest Next.js for App Router Projects
+concept: concept-frontend-build
+lesson: When using Next.js App Router (layout.js, page.js in app/ directory), use Next.js 15+ to avoid Pages Router internal build-analysis conflicts. Next.js 14.2.x may fail with _document errors even in App Router-only projects.
+confidence: 0.85
+tags:
+  - nextjs
+  - app-router
+  - build

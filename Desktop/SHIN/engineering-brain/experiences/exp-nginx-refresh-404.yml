@@ -1,0 +1,14 @@
+id: exp-nginx-refresh-404
+title: Nginx SPA Route 404
+concept: concept-react-routing
+problem: Deployed React SPA returns 404 on all routes except homepage
+root_cause: Served via Express without catch-all route for client-side routing; static file server didn't know about JS routes
+solution: Added app.get('*', (req, res) => res.sendFile('index.html')) fallback in Express before nginx
+outcome: Success
+confidence: 0.9
+usage_count: 5
+tags:
+  - express
+  - spa
+  - react-router
+  - nodejs

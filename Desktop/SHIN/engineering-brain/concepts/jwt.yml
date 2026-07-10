@@ -1,0 +1,12 @@
+id: concept-jwt
+title: JWT
+synonyms:
+  - json-web-token
+  - token
+related_concepts:
+  - authentication
+  - authorization
+  - spring-security
+tags:
+  - security
+  - auth

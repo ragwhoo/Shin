@@ -1,0 +1,14 @@
+id: exp-webpack-build-failures
+title: Webpack Build Failures
+concept: concept-frontend-build
+problem: Production build failed with cryptic module resolution errors that varied between developer machines
+root_cause: Mixed usage of npm and yarn lockfiles created conflicting dependency resolutions across environments
+solution: Standardized on npm with a frozen lockfile in CI and removed all yarn artifacts from the repository
+outcome: Success
+confidence: 0.94
+usage_count: 5
+tags:
+  - webpack
+  - build
+  - npm
+  - dependencies

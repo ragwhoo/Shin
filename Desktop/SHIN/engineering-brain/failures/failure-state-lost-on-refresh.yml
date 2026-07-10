@@ -1,0 +1,10 @@
+id: failure-state-lost-on-refresh
+title: State Lost on Page Refresh
+concept: concept-state-management
+impact: Users lost their multi-step form data when they accidentally refreshed the page, because all state was held in memory only.
+lesson: Persist critical user state to localStorage or sessionStorage. For complex workflows, save draft state periodically to a backend endpoint.
+confidence: 0.92
+tags:
+  - state-management
+  - ui
+  - persistence

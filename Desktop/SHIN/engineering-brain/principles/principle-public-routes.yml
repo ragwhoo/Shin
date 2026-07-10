@@ -1,0 +1,9 @@
+id: principle-public-routes
+title: Public Routes Bypass Authentication
+concept: concept-authentication
+lesson: Always maintain a whitelist of public routes that bypass the authentication filter to avoid blocking login, registration, and health check endpoints.
+confidence: 0.95
+tags:
+  - authentication
+  - security
+  - routing

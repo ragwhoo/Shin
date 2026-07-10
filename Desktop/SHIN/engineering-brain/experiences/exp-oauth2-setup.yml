@@ -1,0 +1,13 @@
+id: exp-oauth2-setup
+title: OAuth2 Provider Config
+concept: concept-authentication
+problem: OAuth2 login with Google and GitHub providers resulted in redirect_uri_mismatch errors
+root_cause: The registered redirect URIs in OAuth provider dashboards did not match the application's callback URLs including port numbers and trailing slashes
+solution: Standardized callback URL format across all providers and added URL normalization in the OAuth2 client configuration
+outcome: Success
+confidence: 0.87
+usage_count: 5
+tags:
+  - oauth2
+  - authentication
+  - redirect

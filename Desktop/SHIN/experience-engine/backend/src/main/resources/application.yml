@@ -1,0 +1,4 @@
+server:
+  port: 8080
+experience-engine:
+  brain-path: ../../engineering-brain

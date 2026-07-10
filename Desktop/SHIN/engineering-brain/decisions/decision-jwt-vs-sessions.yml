@@ -1,0 +1,13 @@
+id: decision-jwt-vs-sessions
+title: Use JWT Instead of Sessions
+concept: concept-authentication
+reason: JWT tokens are stateless, enabling horizontal scaling without shared session stores, and work naturally with mobile and SPA clients.
+alternatives:
+  - Server-side sessions with Redis store
+  - Session cookies with sticky sessions
+outcome: Successful
+confidence: 0.92
+tags:
+  - authentication
+  - jwt
+  - scalability

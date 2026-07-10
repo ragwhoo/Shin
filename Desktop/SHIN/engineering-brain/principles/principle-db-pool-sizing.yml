@@ -1,0 +1,9 @@
+id: principle-db-pool-sizing
+title: Right-Size Connection Pools
+concept: concept-database
+lesson: Set the database connection pool size based on the number of concurrent workers and database capacity, avoiding the common mistake of using very large pools that degrade performance.
+confidence: 0.88
+tags:
+  - database
+  - performance
+  - connection-pooling

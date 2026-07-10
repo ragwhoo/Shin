@@ -1,0 +1,10 @@
+id: failure-agent-reset
+title: Repository Reset Without Checkpoint
+concept: concept-git-workflow
+impact: An agent's repository reset destroyed all uncommitted work including local changes and new files that had not been committed or stashed.
+lesson: Always commit or stash changes before running destructive git operations. Establish a habit of WIP commits when switching contexts.
+confidence: 0.97
+tags:
+  - git
+  - data-loss
+  - workflow

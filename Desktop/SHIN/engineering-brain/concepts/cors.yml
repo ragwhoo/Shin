@@ -1,0 +1,12 @@
+id: concept-cors
+title: CORS
+synonyms:
+  - cross-origin
+  - cors-policy
+related_concepts:
+  - api-design
+  - spring-security
+  - authentication
+tags:
+  - security
+  - web

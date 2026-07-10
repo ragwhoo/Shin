@@ -1,0 +1,13 @@
+id: exp-agent-repo-reset
+title: Agent Repo Reset
+concept: concept-git-workflow
+problem: Git repository became unusable with detached HEAD and uncommitted changes across multiple files after agent ran automated changes
+root_cause: Agent was making changes without proper git workflow leading to repository state corruption
+solution: Established a strict branch-per-task workflow and automated git hygiene checks before any agent operations
+outcome: Partial
+confidence: 1.0
+usage_count: 3
+tags:
+  - git
+  - workflow
+  - automation

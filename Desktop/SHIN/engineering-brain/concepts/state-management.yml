@@ -1,0 +1,12 @@
+id: concept-state-management
+title: State Management
+synonyms:
+  - redux
+  - context
+  - zustand
+related_concepts:
+  - react-routing
+  - api-design
+  - error-handling
+tags:
+  - frontend

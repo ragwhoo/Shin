@@ -1,0 +1,10 @@
+id: failure-flaky-test-false-pass
+title: Flaky Test Hid Real Bug
+concept: concept-testing
+impact: A flaky test that sometimes passed despite incorrect logic gave false confidence, allowing a payment calculation bug to reach production.
+lesson: Treat flaky tests as defects. Quarantine or fix them immediately. Never merge with known flaky tests.
+confidence: 0.91
+tags:
+  - testing
+  - flaky
+  - quality

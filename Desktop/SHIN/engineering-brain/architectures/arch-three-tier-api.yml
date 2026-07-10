@@ -1,0 +1,16 @@
+id: arch-three-tier-api
+title: Three-Tier REST API
+concept: concept-api-design
+components:
+  - Controller layer (request handling)
+  - Service layer (business logic)
+  - Repository layer (data access)
+  - DTOs (data transfer objects)
+  - ExceptionHandler (global error handling)
+used_in:
+  - shin-api
+confidence: 0.95
+tags:
+  - api
+  - architecture
+  - rest

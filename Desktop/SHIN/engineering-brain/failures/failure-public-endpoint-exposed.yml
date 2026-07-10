@@ -1,0 +1,10 @@
+id: failure-public-endpoint-exposed
+title: Public Endpoint Exposed Without Auth
+concept: concept-authentication
+impact: An internal admin endpoint was accidentally exposed without authentication, allowing unauthorized access to sensitive data until discovered in an audit.
+lesson: Default-deny approach for all routes. Explicitly whitelist public routes and verify them in integration tests.
+confidence: 0.96
+tags:
+  - authentication
+  - security
+  - exposure

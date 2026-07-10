@@ -1,0 +1,13 @@
+id: decision-redux-vs-zustand
+title: Zustand over Redux for Simple State
+concept: concept-state-management
+reason: Zustand provides a simpler API with less boilerplate than Redux while still supporting middleware and devtools for the application's moderate state complexity.
+alternatives:
+  - Redux Toolkit with RTK Query
+  - Jotai atomic state
+outcome: Successful
+confidence: 0.85
+tags:
+  - state-management
+  - react
+  - simplicity

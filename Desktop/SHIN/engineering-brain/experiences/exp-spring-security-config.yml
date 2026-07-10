@@ -1,0 +1,13 @@
+id: exp-spring-security-config
+title: Spring Security Config Order
+concept: concept-spring-security
+problem: Custom security filters were being applied in wrong order causing authentication to skip for certain routes
+root_cause: Spring Security filter chain ordering was not explicitly set causing custom filters to execute before the security context filter
+solution: Added @Order annotation and explicitly defined filter chain ordering in SecurityConfig bean
+outcome: Success
+confidence: 0.9
+usage_count: 5
+tags:
+  - spring-security
+  - filter-order
+  - configuration

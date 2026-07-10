@@ -1,0 +1,13 @@
+id: exp-cache-invalidation
+title: Stale Cache After Deploy
+concept: concept-deployment
+problem: Users continued to see old content even after new deployment was verified as successful
+root_cause: CDN and browser cache had long TTL on static assets and API responses were cached at multiple layers
+solution: Implemented cache-busting with content hashes in filenames and added versioned API cache keys
+outcome: Success
+confidence: 0.93
+usage_count: 6
+tags:
+  - deployment
+  - caching
+  - cdn

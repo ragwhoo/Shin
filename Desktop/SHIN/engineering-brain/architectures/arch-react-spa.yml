@@ -1,0 +1,16 @@
+id: arch-react-spa
+title: React SPA Architecture
+concept: concept-react-routing
+components:
+  - React Router (client-side routing)
+  - Zustand stores (state management)
+  - Axios HTTP client (API communication)
+  - ErrorBoundary wrapper (error handling)
+  - Lazy-loaded route components
+used_in:
+  - shin-frontend
+confidence: 0.90
+tags:
+  - react
+  - spa
+  - architecture

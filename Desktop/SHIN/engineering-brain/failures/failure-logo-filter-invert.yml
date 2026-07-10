@@ -1,0 +1,10 @@
+id: failure-logo-filter-invert
+title: brightness(0) invert(1) Filter Creates Unrecognizable Logo Blob
+concept: concept-frontend-build
+impact: Logo appeared as a white ellipse shape instead of the brand logo, and the entire logo area was invisible against the dark hero background
+lesson: "Avoid using filter: brightness(0) invert(1) on complex multi-color logos with circular or organic shapes, as it flattens all colors to a single white silhouette that loses brand identity. Use filter: drop-shadow(...) instead to maintain original colors while improving visibility."
+confidence: 0.90
+tags:
+  - css
+  - logo
+  - filter

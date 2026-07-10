@@ -1,0 +1,14 @@
+id: exp-gsap-mouse-parallax
+title: GSAP Mouse-Follow Parallax with Layered Images
+concept: concept-gsap-animation
+problem: Multi-layered image parallax required smooth mouse-follow movement with subtle depth effect and no edge visibility during translation
+root_cause: Standard hover-based transform transitions were not directional; mouse-follow needed normalized cursor position mapped to per-layer speed values
+solution: "Used GSAP gsap.to() with overwrite: auto to smoothly interpolate x/y transforms per mousemove event. Each layer has speedX/speedY values with optional direction inversion. Applied scale(1.15) to images to prevent edge visibility. Multipliers of 5/3 (x/y) kept movement subtle."
+outcome: Success
+confidence: 0.82
+usage_count: 1
+tags:
+  - gsap
+  - parallax
+  - mouse-follow
+  - layers

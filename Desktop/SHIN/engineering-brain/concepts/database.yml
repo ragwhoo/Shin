@@ -1,0 +1,12 @@
+id: concept-database
+title: Database
+synonyms:
+  - sql
+  - nosql
+  - postgresql
+related_concepts:
+  - api-design
+  - deployment
+  - environment-config
+tags:
+  - backend

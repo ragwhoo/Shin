@@ -1,0 +1,12 @@
+id: concept-environment-config
+title: Environment Configuration
+synonyms:
+  - env-vars
+  - config
+  - dotenv
+related_concepts:
+  - deployment
+  - docker
+  - api-design
+tags:
+  - devops

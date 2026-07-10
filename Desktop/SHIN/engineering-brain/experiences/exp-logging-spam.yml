@@ -1,0 +1,13 @@
+id: exp-logging-spam
+title: Excessive Logging in Production
+concept: concept-logging
+problem: Production log files grew to several GB per day making debugging and log analysis difficult
+root_cause: Debug and trace level logs were enabled in production and many log statements were in hot-path request handling code
+solution: Set production log level to INFO and added log sampling for high-frequency operations
+outcome: Success
+confidence: 0.9
+usage_count: 4
+tags:
+  - logging
+  - production
+  - performance

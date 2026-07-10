@@ -1,0 +1,16 @@
+id: arch-spring-jwt
+title: Spring Boot JWT Architecture
+concept: concept-authentication
+components:
+  - JwtAuthenticationFilter (OncePerRequestFilter)
+  - JwtTokenProvider (token generation/validation)
+  - SecurityConfig (SecurityFilterChain with antMatchers)
+  - JwtAuthenticationEntryPoint (401 handling)
+  - CustomUserDetailsService
+used_in:
+  - shin-api
+confidence: 0.92
+tags:
+  - spring
+  - jwt
+  - authentication

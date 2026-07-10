@@ -1,0 +1,12 @@
+id: concept-deployment
+title: Deployment
+synonyms:
+  - ci-cd
+  - release
+  - pipeline
+related_concepts:
+  - docker
+  - environment-config
+  - frontend-build
+tags:
+  - devops

@@ -1,0 +1,10 @@
+id: principle-critical-visibility-inline
+title: Set Critical Initial Visibility as Inline Styles, Not Dynamically-Injected CSS
+concept: concept-frontend-build
+lesson: "Any CSS that controls whether an element is visible or hidden on the very first paint (e.g., opacity: 0 for entrance animations) must be an inline style on the element, not in styled-jsx or any CSS injected by JavaScript. styled-jsx tags are added after first paint, causing a flash of unstyled content. CSS module files and inline styles are safe because they load before the first paint."
+confidence: 0.95
+tags:
+  - css
+  - animation
+  - nextjs
+  - performance

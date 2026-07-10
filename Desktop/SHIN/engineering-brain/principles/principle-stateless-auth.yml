@@ -1,0 +1,9 @@
+id: principle-stateless-auth
+title: Prefer Stateless Authentication
+concept: concept-authentication
+lesson: Use stateless authentication (JWT tokens) over server-side sessions to simplify horizontal scaling and avoid session synchronization in distributed systems.
+confidence: 0.90
+tags:
+  - authentication
+  - scalability
+  - jwt

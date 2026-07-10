@@ -201,39 +201,15 @@ Deployment Considerations
 
 After implementation completes, submit extracted knowledge via curl.
 
-### Experience:
 ```bash
-curl.exe -X POST http://localhost:8080/api/v1/learn `
-  -H "Content-Type: application/json" `
-  -d '{\"type\":\"experience\",\"title\":\"<title>\",\"content\":\"title: <title>\\nproblem: <what problem>\\nroot_cause: <why>\\nsolution: <how fixed>\\noutcome: <result>\\ntags: [tag1, tag2]\\nconfidence: 0.7\"}'
+curl.exe -X POST http://localhost:8080/api/v1/learn ^
+  -H "Content-Type: application/json" ^
+  -d "{\"type\":\"experience\",\"title\":\"Fixed db connection pool leak\",\"content\":\"Added connection validation and eviction interval to HikariCP config\",\"tags\":[\"database\",\"hikari\",\"pooling\"]}"
 ```
 
-### Principle:
-```bash
-curl.exe -X POST http://localhost:8080/api/v1/learn `
-  -H "Content-Type: application/json" `
-  -d '{\"type\":\"principle\",\"title\":\"<title>\",\"content\":\"title: <title>\\nlesson: <lesson>\\nconfidence: 0.7\"}'
-```
+Supported types: `experience`, `principle`, `failure`, `architecture`, `decision`.
 
-### Failure:
-```bash
-curl.exe -X POST http://localhost:8080/api/v1/learn `
-  -H "Content-Type: application/json" `
-  -d '{\"type\":\"failure\",\"title\":\"<title>\",\"content\":\"title: <title>\\nimpact: <what happened>\\nlesson: <how to prevent>\\nconfidence: 0.7\"}'
-```
-
-### Architecture:
-```bash
-curl.exe -X POST http://localhost:8080/api/v1/learn `
-  -H "Content-Type: application/json" `
-  -d '{\"type\":\"architecture\",\"title\":\"<title>\",\"content\":\"title: <title>\\ncomponents: [comp1, comp2]\\nused_in: <context>\\nconfidence: 0.6\"}'
-```
-
-After successful learn API call, also persist the memory to `engineering-brain/` on disk:
-- `engineering-brain/experiences/` for experiences
-- `engineering-brain/principles/` for principles
-- `engineering-brain/failures/` for failures
-- `engineering-brain/architectures/` for architectures
+The backend saves the YAML to `engineering-brain/{type}s/{id}.yml` and adds it to the in-memory graph automatically. Future reviews will search across all saved learnings.
 
 Update `engineering-brain/graph/relations.yml` if new edges are needed.
 
@@ -246,19 +222,30 @@ If a session ends without submitting learnings after implementation:
 
 ## Starting the Backend
 
-If the EE backend is not running:
+**Auto-start:** The plugin auto-starts the backend when you run `curl` to `/api/v1/review` or `/api/v1/learn`. You don't need to start it manually.
 
+Manual start (if auto-start fails):
 ```powershell
 powershell -File "$env:USERPROFILE\.agents\skills\engineering-experience-engine\scripts\start-ee.ps1"
 ```
 
-Or:
+Or directly:
 ```bash
-cd ~/Desktop/SHIN/experience-engine/backend
-mvn spring-boot:run -q
+java -jar ~/Desktop/SHIN/experience-engine/backend/target/experience-engine-0.1.0.jar --experience-engine.brain-path=~/Desktop/SHIN/engineering-brain
 ```
 
-The plugin also auto-starts the backend when it detects a curl command targeting the review API.
+## First-Time Setup
+
+```powershell
+# 1. Build the JAR (needs Java 21 + Maven, one-time only)
+cd ~/Desktop/SHIN/experience-engine/backend
+mvn package -DskipTests -q
+
+# 2. Start the backend
+powershell -File "$env:USERPROFILE\.agents\skills\engineering-experience-engine\scripts\start-ee.ps1"
+```
+
+After that, the JAR is cached. Subsequent starts don't need Maven.
 
 ## Backend Troubleshooting
 

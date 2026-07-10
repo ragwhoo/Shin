@@ -1,0 +1,13 @@
+id: exp-api-version-mismatch
+title: API Version Mismatch
+concept: concept-api-design
+problem: Mobile app users experienced data corruption after backend API was updated with breaking changes
+root_cause: API changes were deployed without versioning and the mobile app was using an outdated request/response format
+solution: Implemented API versioning via URL path prefix and maintained backward compatibility for older versions
+outcome: Success
+confidence: 0.91
+usage_count: 5
+tags:
+  - api-design
+  - versioning
+  - backward-compatibility

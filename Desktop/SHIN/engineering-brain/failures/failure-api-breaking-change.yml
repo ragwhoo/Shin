@@ -1,0 +1,10 @@
+id: failure-api-breaking-change
+title: Breaking API Change Without Notice
+concept: concept-api-design
+impact: A change to the API response format broke all mobile app consumers that were not updated, causing a production outage for existing users.
+lesson: Always version APIs and deprecate old versions with a migration period. Communicate breaking changes through a changelog and migration guide.
+confidence: 0.97
+tags:
+  - api
+  - breaking-change
+  - versioning

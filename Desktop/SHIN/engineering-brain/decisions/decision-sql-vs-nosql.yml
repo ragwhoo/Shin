@@ -1,0 +1,13 @@
+id: decision-sql-vs-nosql
+title: PostgreSQL over MongoDB
+concept: concept-database
+reason: The application required strong relational integrity, transactions, and complex joins that are better suited to a relational database.
+alternatives:
+  - MongoDB with document references
+  - MySQL with InnoDB
+outcome: Successful
+confidence: 0.95
+tags:
+  - database
+  - postgresql
+  - sql

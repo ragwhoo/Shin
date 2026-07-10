@@ -1,0 +1,13 @@
+id: decision-nginx-vs-caddy
+title: Nginx as Reverse Proxy
+concept: concept-deployment
+reason: Nginx has a larger community, more documentation, and better performance for static file serving and reverse proxy workloads.
+alternatives:
+  - Caddy with automatic TLS
+  - Apache HTTP Server
+outcome: Successful
+confidence: 0.87
+tags:
+  - deployment
+  - nginx
+  - proxy

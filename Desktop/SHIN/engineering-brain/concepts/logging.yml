@@ -1,0 +1,11 @@
+id: concept-logging
+title: Logging
+synonyms:
+  - monitoring
+  - observability
+related_concepts:
+  - error-handling
+  - deployment
+  - environment-config
+tags:
+  - devops

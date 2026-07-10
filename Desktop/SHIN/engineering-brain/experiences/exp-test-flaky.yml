@@ -1,0 +1,14 @@
+id: exp-test-flaky
+title: Flaky Integration Tests
+concept: concept-testing
+problem: Integration tests passed locally but failed intermittently in CI pipeline causing build failures
+root_cause: Tests depended on shared database state and ran in parallel causing race conditions
+solution: Isolated test data per test case using test containers and random data generation
+outcome: Success
+confidence: 0.89
+usage_count: 7
+tags:
+  - testing
+  - integration
+  - flaky
+  - ci

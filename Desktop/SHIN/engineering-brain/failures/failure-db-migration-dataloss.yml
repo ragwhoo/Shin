@@ -1,0 +1,10 @@
+id: failure-db-migration-dataloss
+title: Destructive Migration Lost Data
+concept: concept-database
+impact: A migration script dropped columns containing production data without a rollback plan, causing irreversible data loss that had to be restored from a backup.
+lesson: Never run destructive migrations without a backup. Prefer additive migrations and use reversible migration patterns.
+confidence: 0.95
+tags:
+  - database
+  - migration
+  - data-loss

@@ -1,0 +1,14 @@
+id: exp-react-router-refresh
+title: React Router Refresh 404
+concept: concept-react-routing
+problem: All React Router routes returned 404 when page was refreshed or directly accessed via URL
+root_cause: Nginx was not configured to fallback to index.html for client-side routing paths
+solution: Added try_files $uri $uri/ /index.html to Nginx location block for the SPA
+outcome: Success
+confidence: 0.98
+usage_count: 12
+tags:
+  - react-router
+  - nginx
+  - spa
+  - 404

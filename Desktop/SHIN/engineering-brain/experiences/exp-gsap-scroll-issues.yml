@@ -1,0 +1,14 @@
+id: exp-gsap-scroll-issues
+title: GSAP ScrollTrigger Flicker
+concept: concept-gsap-animation
+problem: Scroll-triggered animations were flickering or triggering at wrong scroll positions on page load
+root_cause: ScrollTrigger was being initialized before the DOM was fully painted causing incorrect start/end calculations
+solution: Wrapped ScrollTrigger refresh in a requestAnimationFrame and added a small delay after DOMContentLoaded before registering triggers
+outcome: Success
+confidence: 0.88
+usage_count: 6
+tags:
+  - gsap
+  - scrolltrigger
+  - animation
+  - flicker

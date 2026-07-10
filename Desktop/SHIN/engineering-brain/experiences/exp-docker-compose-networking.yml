@@ -1,0 +1,13 @@
+id: exp-docker-compose-networking
+title: Docker Compose Networking
+concept: concept-docker
+problem: Backend container could not connect to database container even though both were defined in docker-compose.yml
+root_cause: Services were on different Docker networks because a custom network was defined but not applied to all services
+solution: Added a shared network definition and applied it to all services in the docker-compose file
+outcome: Success
+confidence: 0.93
+usage_count: 8
+tags:
+  - docker
+  - docker-compose
+  - networking

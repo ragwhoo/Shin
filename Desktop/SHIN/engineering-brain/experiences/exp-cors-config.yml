@@ -1,0 +1,13 @@
+id: exp-cors-config
+title: CORS Blocking Frontend
+concept: concept-cors
+problem: Frontend application could not make API calls to backend with CORS errors in browser console
+root_cause: Backend CORS configuration was too restrictive and did not include the frontend origin in allowed origins
+solution: Configured CORS to allow the specific frontend origin and added proper allowed methods and headers
+outcome: Partial
+confidence: 0.96
+usage_count: 10
+tags:
+  - cors
+  - frontend
+  - api

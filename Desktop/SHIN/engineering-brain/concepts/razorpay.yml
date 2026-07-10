@@ -1,0 +1,10 @@
+id: concept-razorpay
+title: Razorpay
+synonyms:
+  - payment-gateway
+  - upi
+related_concepts:
+  - payment-integration
+  - api-design
+tags:
+  - payments

@@ -1,0 +1,9 @@
+id: principle-api-versioning
+title: Version APIs from Day One
+concept: concept-api-design
+lesson: Apply API versioning from the first release to maintain backward compatibility and give consumers a migration path when changes are needed.
+confidence: 0.96
+tags:
+  - api
+  - versioning
+  - backward-compatibility

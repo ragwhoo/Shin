@@ -1,0 +1,13 @@
+id: decision-react-vs-vue
+title: React over Vue for Team Scale
+concept: concept-react-routing
+reason: React's larger ecosystem, hiring pool, and library maturity made it the safer choice for long-term team growth and complex UI requirements.
+alternatives:
+  - Vue 3 with Composition API
+  - Svelte with SvelteKit
+outcome: Successful
+confidence: 0.88
+tags:
+  - react
+  - frontend
+  - framework

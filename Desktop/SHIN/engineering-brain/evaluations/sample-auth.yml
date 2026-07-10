@@ -1,0 +1,37 @@
+task: Implement JWT Authentication in a Spring Boot application
+
+baseline_plan: |
+  1. Add spring-boot-starter-security dependency
+  2. Create JwtFilter class
+  3. Add filter to SecurityFilterChain
+  4. Test with Postman
+
+baseline_notes: |
+  Did not consider:
+  - Public route exclusion
+  - Refresh token rotation
+  - Existing architecture patterns
+
+reflection_plan: |
+  1. Review existing Spring JWT architecture (arch-spring-jwt)
+  2. Exclude public routes from JwtFilter (principle-public-routes)
+  3. Implement refresh token rotation (from exp-jwt-403 lesson)
+  4. Add CORS configuration for frontend
+  5. Add startup env validation for JWT secret
+
+reflection_notes: |
+  Reflection identified:
+  - Known failure pattern (public route 403)
+  - Reusable architecture
+  - Missing env validation
+
+baseline_score: 4
+reflection_score: 8
+improvement: 4
+
+metrics:
+  risks_identified: 0 → 3
+  failures_avoided: 0 → 1
+  pattern_reuse: 0 → 1
+  architectural_consistency: 2 → 4
+  planning_quality: 2 → 4

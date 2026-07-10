@@ -1,0 +1,12 @@
+id: concept-frontend-build
+title: Frontend Build
+synonyms:
+  - webpack
+  - vite
+  - bundling
+related_concepts:
+  - react-routing
+  - deployment
+  - environment-config
+tags:
+  - frontend

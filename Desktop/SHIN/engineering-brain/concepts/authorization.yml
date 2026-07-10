@@ -1,0 +1,12 @@
+id: concept-authorization
+title: Authorization
+synonyms:
+  - access-control
+  - permissions
+  - rbac
+related_concepts:
+  - authentication
+  - jwt
+  - spring-security
+tags:
+  - security

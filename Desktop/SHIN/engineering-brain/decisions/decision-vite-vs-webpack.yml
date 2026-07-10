@@ -1,0 +1,13 @@
+id: decision-vite-vs-webpack
+title: Vite over Webpack
+concept: concept-frontend-build
+reason: Vite provides significantly faster dev server startup and HMR by leveraging native ES modules, reducing development iteration time.
+alternatives:
+  - Webpack 5 with esbuild-loader
+  - Turbopack
+outcome: Successful
+confidence: 0.93
+tags:
+  - build-tool
+  - vite
+  - performance

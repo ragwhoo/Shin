@@ -1,0 +1,13 @@
+id: exp-db-migration-failed
+title: Database Migration Failure
+concept: concept-database
+problem: Database migration script failed in production causing schema mismatch between environments
+root_cause: Migration script contained a destructive operation that ran against the production database without a backup
+solution: Added pre-migration backup step and implemented flyway-style versioned migrations with rollback support
+outcome: Failure
+confidence: 0.91
+usage_count: 6
+tags:
+  - database
+  - migration
+  - schema

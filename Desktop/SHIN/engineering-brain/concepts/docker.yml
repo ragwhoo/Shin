@@ -1,0 +1,10 @@
+id: concept-docker
+title: Docker
+synonyms:
+  - containers
+  - docker-compose
+related_concepts:
+  - deployment
+  - environment-config
+tags:
+  - devops

@@ -1,0 +1,13 @@
+id: decision-structured-vs-plain-logging
+title: Structured Logging over Plain Text
+concept: concept-logging
+reason: Structured JSON logs enable automated parsing, querying, and alerting in log aggregation tools like ELK and Grafana Loki.
+alternatives:
+  - Plain text logging with grep
+  - Binary logging format
+outcome: Successful
+confidence: 0.96
+tags:
+  - logging
+  - observability
+  - json

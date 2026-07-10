@@ -1,0 +1,9 @@
+id: principle-gsap-parallax-scale
+title: Scale Parallax Images to Prevent Edge Visibility
+concept: concept-gsap-animation
+lesson: "When using GSAP to translate layers in a multi-image parallax, apply transform: scale(1.15) to each image so that during translation the viewport never reveals an empty edge. The layer container gets the GSAP transform; the image gets the scale."
+confidence: 0.88
+tags:
+  - gsap
+  - parallax
+  - css

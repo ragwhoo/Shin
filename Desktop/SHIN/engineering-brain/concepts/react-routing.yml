@@ -1,0 +1,11 @@
+id: concept-react-routing
+title: React Routing
+synonyms:
+  - react-router
+  - spa-routing
+  - navigation
+related_concepts:
+  - frontend-build
+  - state-management
+tags:
+  - frontend

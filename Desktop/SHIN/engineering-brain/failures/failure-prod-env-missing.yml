@@ -1,0 +1,10 @@
+id: failure-prod-env-missing
+title: Production Deploy Missing Env Variables
+concept: concept-deployment
+impact: The application crashed on startup in production because required environment variables like DATABASE_URL and SECRET_KEY were not configured.
+lesson: Implement startup environment validation and use infrastructure-as-code to manage environment configuration across all deployment targets.
+confidence: 0.98
+tags:
+  - deployment
+  - configuration
+  - validation

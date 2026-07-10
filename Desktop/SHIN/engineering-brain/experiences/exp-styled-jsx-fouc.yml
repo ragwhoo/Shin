@@ -1,0 +1,15 @@
+id: exp-styled-jsx-fouc
+title: styled-jsx Causes Flash of Unstyled Content on Initial Paint
+concept: concept-frontend-build
+problem: Hero section layers were briefly visible before the entrance animation played, appearing as a "broken element" flash
+root_cause: "styled-jsx injects its <style> tag dynamically via JavaScript, which runs after the browser's first paint. CSS rules like opacity: 0 inside styled-jsx are not applied on the initial render, so elements render at full opacity before the animation starts."
+solution: "Move critical initial-state styles (opacity: 0, transform) to inline styles on the elements themselves, where they are applied at HTML parse time before any CSS or JavaScript loads. GSAP's .fromTo() then overrides these inline values during the animation timeline."
+outcome: Success
+confidence: 0.95
+usage_count: 1
+tags:
+  - nextjs
+  - styled-jsx
+  - animation
+  - flash
+  - gsap

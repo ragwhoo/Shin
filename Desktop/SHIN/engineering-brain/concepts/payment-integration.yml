@@ -1,0 +1,11 @@
+id: concept-payment-integration
+title: Payment Integration
+synonyms:
+  - payments
+  - checkout
+  - billing
+related_concepts:
+  - razorpay
+  - api-design
+tags:
+  - payments

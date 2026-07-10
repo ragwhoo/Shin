@@ -1,0 +1,9 @@
+id: principle-wip-commits
+title: WIP Commits Before Destructive Operations
+concept: concept-git-workflow
+lesson: Always commit or stash work-in-progress before running destructive git operations like reset, rebase, or force push to avoid losing uncommitted changes.
+confidence: 0.98
+tags:
+  - git
+  - workflow
+  - safety

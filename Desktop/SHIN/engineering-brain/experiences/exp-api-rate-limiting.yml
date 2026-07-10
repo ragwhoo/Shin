@@ -1,0 +1,13 @@
+id: exp-api-rate-limiting
+title: API Rate Limiting Not Working
+concept: concept-api-design
+problem: API rate limiting was not preventing excessive requests causing server resource exhaustion
+root_cause: Rate limiter was configured per-instance but load balancer distributed requests across multiple instances diluting the limit
+solution: Moved rate limiting to a centralized Redis-backed implementation shared across all instances
+outcome: Failure
+confidence: 0.94
+usage_count: 5
+tags:
+  - api-design
+  - rate-limiting
+  - redis

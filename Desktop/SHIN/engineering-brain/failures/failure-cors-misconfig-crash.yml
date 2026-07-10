@@ -1,0 +1,10 @@
+id: failure-cors-misconfig-crash
+title: Overly Restrictive CORS Broke Frontend
+concept: concept-cors
+impact: A production deployment with overly restrictive CORS settings caused all frontend API requests to fail with cross-origin errors, taking the application down.
+lesson: Test CORS configuration in a staging environment with the exact frontend origin before deploying. Use environment-specific CORS profiles.
+confidence: 0.94
+tags:
+  - cors
+  - configuration
+  - outage

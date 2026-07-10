@@ -1,0 +1,11 @@
+id: concept-error-handling
+title: Error Handling
+synonyms:
+  - exceptions
+  - error-boundaries
+related_concepts:
+  - logging
+  - api-design
+  - testing
+tags:
+  - architecture

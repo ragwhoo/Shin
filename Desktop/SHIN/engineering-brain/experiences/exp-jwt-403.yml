@@ -1,0 +1,13 @@
+id: exp-jwt-403
+title: JWT 403 Fix
+concept: concept-authentication
+problem: Public routes returning 403 errors after JWT filter implementation
+root_cause: JwtFilter was validating all requests including public endpoints like /api/auth/login and /api/public/**
+solution: Excluded public route patterns from the JWT filter chain using SecurityConfig antMatchers
+outcome: Success
+confidence: 0.95
+usage_count: 7
+tags:
+  - jwt
+  - spring-security
+  - filter-chain

@@ -1,0 +1,13 @@
+id: exp-error-boundary-missing
+title: Missing Error Boundary Crash
+concept: concept-error-handling
+problem: Entire React application crashed and showed white screen when a component threw an error during render
+root_cause: No React Error Boundary was implemented to catch rendering errors gracefully
+solution: Added a top-level Error Boundary component with fallback UI and error logging integration
+outcome: Success
+confidence: 0.97
+usage_count: 11
+tags:
+  - error-handling
+  - react
+  - error-boundary

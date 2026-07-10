@@ -1,0 +1,9 @@
+id: principle-cors-whitelist
+title: Explicitly Whitelist CORS Origins
+concept: concept-cors
+lesson: Maintain an explicit whitelist of allowed CORS origins rather than using wildcards to prevent unintended cross-origin access in production.
+confidence: 0.92
+tags:
+  - cors
+  - security
+  - configuration

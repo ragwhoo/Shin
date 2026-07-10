@@ -1,0 +1,13 @@
+id: decision-rest-vs-graphql
+title: REST API over GraphQL
+concept: concept-api-design
+reason: REST is simpler to cache, debug, and version. For the team size and project complexity, GraphQL's flexibility was unnecessary overhead.
+alternatives:
+  - GraphQL with Apollo Server
+  - tRPC for type-safe APIs
+outcome: Successful
+confidence: 0.89
+tags:
+  - api
+  - architecture
+  - rest

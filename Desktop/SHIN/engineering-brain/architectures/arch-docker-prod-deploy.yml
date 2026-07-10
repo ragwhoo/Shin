@@ -1,0 +1,16 @@
+id: arch-docker-prod-deploy
+title: Docker Production Deployment
+concept: concept-docker
+components:
+  - Docker Compose (service orchestration)
+  - Nginx (reverse proxy and TLS termination)
+  - PostgreSQL (database container)
+  - Application container (Spring Boot JAR)
+  - .env file (externalized configuration)
+used_in:
+  - shin-infra
+confidence: 0.88
+tags:
+  - docker
+  - deployment
+  - production

@@ -1,0 +1,11 @@
+{
+  "name": "@experience-engine/ee",
+  "version": "1.0.0",
+  "description": "Engineering Experience Engine — engineering judgment for AI coding agents",
+  "bin": {
+    "ee": "bin/ee.js"
+  },
+  "files": ["bin", "lib"],
+  "keywords": ["opencode", "engineering", "experience", "knowledge", "brain"],
+  "license": "MIT"
+}

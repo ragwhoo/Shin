@@ -1,0 +1,13 @@
+id: exp-payment-refund-flow
+title: Payment Refund Flow Bug
+concept: concept-payment-integration
+problem: Refund requests were accepted by the system but the actual refund was never processed for users
+root_cause: Refund API call to the payment gateway was wrapped in a conditional block that never evaluated to true
+solution: Fixed the refund logic by removing the erroneous condition and adding proper refund status tracking
+outcome: Success
+confidence: 0.88
+usage_count: 4
+tags:
+  - payment
+  - refund
+  - integration

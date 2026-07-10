@@ -1,0 +1,13 @@
+id: exp-db-connection-pooling
+title: Database Connection Pool Exhaustion
+concept: concept-database
+problem: Application became unresponsive under moderate load with database connection timeouts
+root_cause: Database connection pool size was too small and connections were not being released after query execution
+solution: Increased connection pool size and fixed connection leak by ensuring all database calls used try-with-resources
+outcome: Success
+confidence: 0.94
+usage_count: 7
+tags:
+  - database
+  - connection-pool
+  - performance

@@ -1,0 +1,13 @@
+id: decision-docker-swarm-vs-k8s
+title: Docker Compose over Kubernetes for Small Teams
+concept: concept-docker
+reason: Docker Compose provides sufficient orchestration for a small team without the operational complexity of managing a Kubernetes cluster.
+alternatives:
+  - Kubernetes with Minikube
+  - Docker Swarm
+outcome: Successful
+confidence: 0.91
+tags:
+  - docker
+  - orchestration
+  - deployment

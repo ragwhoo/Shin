@@ -1,0 +1,13 @@
+id: exp-deployment-env-vars
+title: Missing Env Variables in Production
+concept: concept-deployment
+problem: Application crashed on startup after deployment to production environment
+root_cause: Required environment variables like DB_URL and API_KEY were not configured in the production environment
+solution: Created a deployment checklist and automated env variable validation on application startup
+outcome: Partial
+confidence: 0.97
+usage_count: 9
+tags:
+  - deployment
+  - environment
+  - configuration

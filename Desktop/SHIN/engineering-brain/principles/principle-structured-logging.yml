@@ -1,0 +1,9 @@
+id: principle-structured-logging
+title: Use Structured Logging Everywhere
+concept: concept-logging
+lesson: Always use structured logging (JSON format) with consistent fields to enable efficient searching, filtering, and aggregation in log analysis tools.
+confidence: 0.93
+tags:
+  - logging
+  - observability
+  - debugging

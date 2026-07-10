@@ -1,0 +1,13 @@
+id: exp-uncaught-exception-crash
+title: Uncaught Exception Crash
+concept: concept-error-handling
+problem: Node.js backend process crashed silently in production without any visible error logs
+root_cause: An unhandled promise rejection in an async route handler caused the process to exit without proper error logging
+solution: Added global process.on handlers for uncaughtException and unhandledRejection with proper logging and graceful shutdown
+outcome: Success
+confidence: 0.96
+usage_count: 8
+tags:
+  - error-handling
+  - nodejs
+  - crash

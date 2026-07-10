@@ -1,0 +1,14 @@
+id: exp-jwt-token-expired
+title: JWT Token Expiry Handling
+concept: concept-jwt
+problem: Users were abruptly logged out with no warning when their JWT token expired mid-session
+root_cause: No token refresh mechanism was implemented and the application did not handle 401 responses gracefully
+solution: Implemented silent token refresh using refresh tokens and added proactive token expiry warnings in the UI
+outcome: Success
+confidence: 0.92
+usage_count: 9
+tags:
+  - jwt
+  - token
+  - refresh
+  - authentication

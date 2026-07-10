@@ -1,0 +1,13 @@
+id: concept-authentication
+title: Authentication
+synonyms:
+  - auth
+  - login
+  - sign-in
+  - identity
+related_concepts:
+  - authorization
+  - jwt
+  - spring-security
+tags:
+  - security

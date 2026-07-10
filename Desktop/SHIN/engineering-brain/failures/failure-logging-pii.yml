@@ -1,0 +1,10 @@
+id: failure-logging-pii
+title: PII Leaked in Application Logs
+concept: concept-logging
+impact: User email addresses and phone numbers were logged in plain text during a payment flow, creating a compliance and privacy violation.
+lesson: Implement log sanitization pipelines and audit log output for sensitive fields. Never log request/response bodies without filtering PII.
+confidence: 0.93
+tags:
+  - logging
+  - privacy
+  - pii

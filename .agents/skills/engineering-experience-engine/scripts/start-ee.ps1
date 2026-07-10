@@ -26,12 +26,32 @@ if (-not (Test-Path $BackendPath)) {
     exit 1
 }
 
-Write-Host "Starting EE backend from $BackendPath with brain $BrainPath ..."
+$JarPath = Join-Path $BackendPath "target\experience-engine-0.1.0.jar"
+
+# Build JAR if missing
+if (-not (Test-Path $JarPath)) {
+    Write-Host "JAR not found. Building with Maven (needed once)..."
+    try {
+        $build = Start-Process -NoNewWindow -FilePath "mvn.cmd" `
+            -ArgumentList "package -DskipTests -q" `
+            -WorkingDirectory $BackendPath `
+            -PassThru -Wait
+        if ($build.ExitCode -ne 0) {
+            Write-Error "Maven build failed"
+            exit 1
+        }
+    } catch {
+        Write-Error "Maven not found. Install Java 21 and Maven, or run: cd $BackendPath && mvn spring-boot:run"
+        exit 1
+    }
+}
+
+Write-Host "Starting EE backend..."
 
 $env:ENGINEERING_BRAIN_PATH = $BrainPath
 
-$process = Start-Process -WindowStyle Hidden -FilePath "mvn.cmd" `
-    -ArgumentList "spring-boot:run" `
+$process = Start-Process -WindowStyle Hidden -FilePath "java.exe" `
+    -ArgumentList "-jar ""$JarPath"" --experience-engine.brain-path=""$BrainPath""" `
     -WorkingDirectory $BackendPath `
     -PassThru
 
@@ -42,7 +62,8 @@ while ($timer.Elapsed.TotalSeconds -lt $TimeoutSeconds) {
     try {
         $response = Invoke-WebRequest -Uri "http://localhost:$Port/api/v1/concepts" -UseBasicParsing -TimeoutSec 2
         if ($response.StatusCode -eq 200) {
-            Write-Host "EE started successfully in $([math]::Round($timer.Elapsed.TotalSeconds, 1))s on port $Port"
+            $elapsed = [math]::Round($timer.Elapsed.TotalSeconds, 1)
+            Write-Host "EE started in ${elapsed}s on port $Port"
             exit 0
         }
     } catch { }
