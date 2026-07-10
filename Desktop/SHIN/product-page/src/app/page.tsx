@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
+
 import {
   TerminalAnimationRoot,
-  TerminalAnimationBackgroundGradient,
   TerminalAnimationContainer,
   TerminalAnimationWindow,
   TerminalAnimationContent,
@@ -12,11 +13,10 @@ import {
   TerminalAnimationTrailingPrompt,
   TerminalAnimationTabList,
   TerminalAnimationTabTrigger,
-  useTerminalAnimation,
   type TabContent,
 } from "@/components/ui/terminal-animation";
 
-const shinTabs: TabContent[] = [
+const tabs: TabContent[] = [
   {
     label: "review",
     command: 'shin review "Implement JWT authentication"',
@@ -92,128 +92,102 @@ const shinTabs: TabContent[] = [
   },
 ];
 
-function TerminalHero() {
-  return (
-    <TerminalAnimationRoot
-      tabs={shinTabs}
-      alwaysDark
-      hideCursorOnComplete
-      className="relative overflow-hidden min-h-screen flex items-center justify-center"
-    >
-      <TerminalAnimationBackgroundGradient />
-      <div className="relative z-10 flex flex-col items-center pt-24 pb-16 md:pt-32 md:pb-24 px-4">
-        <div className="text-center mb-8 md:mb-12">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-300">
-              SHIN
-            </span>
-          </h1>
-          <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto font-[family-name:var(--font-geist-mono)]">
-            AI agents have knowledge but no experience.
-            <br />
-            <span className="text-zinc-200 font-semibold">
-              SHIN gives them the latter.
-            </span>
-          </p>
-        </div>
-
-        <TerminalAnimationContainer>
-          <TerminalWindowFrame />
-        </TerminalAnimationContainer>
-
-        <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
-          <code className="px-5 py-3 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 text-sm font-[family-name:var(--font-geist-mono)]">
-            npx shin-engine start
-          </code>
-          <a
-            href="https://www.npmjs.com/package/shin-engine"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-medium transition-colors"
-          >
-            Get Started
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
-        </div>
-      </div>
-    </TerminalAnimationRoot>
-  );
-}
-
-function TerminalWindowFrame() {
-  const { tabs, activeTab, setActiveTab } = useTerminalAnimation();
-
-  return (
-    <TerminalAnimationWindow
-      backgroundColor="#0f0f14"
-      minHeight="26rem"
-      className="border border-zinc-800 shadow-2xl shadow-violet-900/20"
-    >
-      <div className="flex items-center gap-1.5 px-4 pt-3 pb-2 border-b border-zinc-800">
-        <div className="w-3 h-3 rounded-full bg-red-500/80" />
-        <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-        <div className="w-3 h-3 rounded-full bg-green-500/80" />
-        <TerminalAnimationTabList className="ml-4 flex gap-1">
-          {tabs.map((tab, i) => (
-            <TerminalAnimationTabTrigger
-              key={i}
-              index={i}
-              className={`px-3 py-1 text-xs rounded-md transition-colors font-[family-name:var(--font-geist-mono)] ${
-                activeTab === i
-                  ? "bg-zinc-800 text-zinc-100"
-                  : "text-zinc-500 hover:text-zinc-300"
-              }`}
-            >
-              {tab.label}
-            </TerminalAnimationTabTrigger>
-          ))}
-        </TerminalAnimationTabList>
-      </div>
-
-      <TerminalAnimationContent>
-        <div className="flex items-center gap-2 text-sm font-[family-name:var(--font-geist-mono)] text-zinc-400 mb-1">
-          <span className="text-[#22ff73]">$</span>
-          <TerminalAnimationCommandBar />
-          <TerminalAnimationBlinkingCursor />
-        </div>
-        <TerminalAnimationOutput
-          renderLine={(line, i, visible) => (
-            <div
-              key={`${activeTab}-${i}`}
-              className={`text-sm font-[family-name:var(--font-geist-mono)] leading-6 ${
-                visible ? "opacity-100" : "opacity-0"
-              } transition-opacity duration-100`}
-            >
-              <span className={line.color || "text-zinc-300"}>
-                {line.text || "\u00A0"}
-              </span>
-            </div>
-          )}
-        />
-        <TerminalAnimationTrailingPrompt>
-          <span className="text-[#22ff73] text-sm font-[family-name:var(--font-geist-mono)]">$</span>
-          <TerminalAnimationBlinkingCursor />
-        </TerminalAnimationTrailingPrompt>
-      </TerminalAnimationContent>
-    </TerminalAnimationWindow>
-  );
-}
-
 export default function Home() {
+  const [activeTab, setActiveTab] = useState(0);
+
   return (
-    <>
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/60 bg-zinc-950/80 backdrop-blur-sm">
+    <div
+      className="min-h-screen bg-cover bg-center flex flex-col"
+      style={{ backgroundImage: "url(/bamkin.png)" }}
+    >
+      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/20 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto flex items-center justify-between px-4 h-14">
-          <span className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-300">
-            SHIN
-          </span>
+          <span className="text-lg font-bold text-white/90">SHIN</span>
           <div className="flex items-center gap-4">
-            <a href="https://github.com/anomalyco/shin" className="text-sm text-zinc-400 hover:text-zinc-200 transition-colors">GitHub</a>
-            <a href="https://www.npmjs.com/package/shin-engine" className="text-sm text-zinc-400 hover:text-zinc-200 transition-colors">npm</a>
+            <a href="https://github.com/anomalyco/shin" className="text-sm text-white/60 hover:text-white/90 transition-colors">GitHub</a>
+            <a href="https://www.npmjs.com/package/shin-engine" className="text-sm text-white/60 hover:text-white/90 transition-colors">npm</a>
           </div>
         </div>
       </nav>
-      <TerminalHero />
-    </>
+
+      <div className="flex-1 flex flex-col items-center px-4">
+        <div className="text-center">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-rose-200 to-fuchsia-200">
+              SHIN
+            </span>
+          </h1>
+          <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto">
+            AI agents have knowledge but no experience.
+            <br />
+            <span className="text-white/90 font-semibold">SHIN gives them the latter.</span>
+          </p>
+        </div>
+
+        <TerminalAnimationRoot
+          tabs={tabs}
+          activeTab={activeTab}
+          onActiveTabChange={setActiveTab}
+          alwaysDark
+          hideCursorOnComplete
+          className="w-full flex-1 flex flex-col items-center"
+        >
+          <TerminalAnimationContainer className="!pt-0 flex-1 flex flex-col">
+            <TerminalAnimationWindow
+              backgroundColor="#0f0f14"
+              animateOnVisible={false}
+              className="flex-1 border border-zinc-800 shadow-2xl shadow-black/40"
+            >
+              <div className="flex items-center gap-1.5 px-4 pt-3 pb-2 border-b border-zinc-800 shrink-0">
+                <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                <TerminalAnimationTabList className="ml-4 flex gap-1">
+                  {tabs.map((tab, i) => (
+                    <TerminalAnimationTabTrigger
+                      key={i}
+                      index={i}
+                      className={`px-3 py-1 text-xs rounded-md transition-colors ${
+                        activeTab === i
+                          ? "bg-zinc-800 text-zinc-100"
+                          : "text-zinc-500 hover:text-zinc-300"
+                      }`}
+                    >
+                      {tab.label}
+                    </TerminalAnimationTabTrigger>
+                  ))}
+                </TerminalAnimationTabList>
+              </div>
+
+              <TerminalAnimationContent className="flex-1 overflow-y-hidden">
+                <div className="flex items-center gap-2 text-sm text-zinc-400 mb-1">
+                  <span className="text-[#22ff73]">$</span>
+                  <TerminalAnimationCommandBar />
+                </div>
+                <TerminalAnimationOutput
+                  renderLine={(line, index, visible) => {
+                    if (!visible) return null;
+                    return (
+                      <div className="font-mono text-sm leading-relaxed">
+                        <span className="text-zinc-600 mr-3 select-none">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <span className={line.color ?? "text-zinc-300"}>
+                          {line.text || "\u00A0"}
+                        </span>
+                      </div>
+                    );
+                  }}
+                />
+                <TerminalAnimationTrailingPrompt>
+                  <span className="text-[#22ff73] text-sm">$</span>
+                  <TerminalAnimationBlinkingCursor />
+                </TerminalAnimationTrailingPrompt>
+              </TerminalAnimationContent>
+            </TerminalAnimationWindow>
+          </TerminalAnimationContainer>
+        </TerminalAnimationRoot>
+      </div>
+    </div>
   );
 }

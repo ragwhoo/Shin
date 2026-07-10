@@ -143,8 +143,9 @@ async function main() {
 
   if (!cmd) {
     log("shin-engine v" + VERSION);
-    log("Usage: shin <command>");
-    log("Run 'shin --help' for options");
+    log("");
+    log("Install:  npm install -g shin-engine");
+    log("Usage:    shin --help");
     return;
   }
 
@@ -201,7 +202,10 @@ async function main() {
   }
 
   if (cmd === "--help" || cmd === "-h") {
-    log("Usage: shin <command>");
+    log("SHIN - Engineering Experience Engine");
+    log("");
+    log("Install:");
+    log("  npm install -g shin-engine");
     log("");
     log("Commands:");
     log("  shin start    Start the SHIN backend (first run downloads + installs)");

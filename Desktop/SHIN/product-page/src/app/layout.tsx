@@ -31,27 +31,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
-      style={{ colorScheme: "dark" }}
+      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      style={{ colorScheme: "light" }}
     >
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                const stored = localStorage.getItem('shin-theme');
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                if (stored === 'light') {
-                  document.documentElement.classList.remove('dark');
-                  document.documentElement.style.colorScheme = 'light';
-                  document.querySelector('meta[name="color-scheme"]')?.setAttribute('content', 'light');
-                }
-              } catch (e) {}
-            `,
-          }}
-        />
-      </head>
-      <body className="min-h-screen flex flex-col bg-zinc-950 text-zinc-100 font-[family-name:var(--font-geist-sans)]">
+      <head />
+      <body className="min-h-screen flex flex-col bg-pink-100 text-zinc-800 font-[family-name:var(--font-geist-sans)]">
         {children}
       </body>
     </html>
