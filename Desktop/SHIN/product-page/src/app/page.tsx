@@ -275,7 +275,7 @@ export default function Home() {
           ].map((feature, i) => (
             <div
               key={feature.title}
-              className={`group relative rounded-2xl border border-neutral-200 bg-white p-8 transition-all duration-300 hover:border-neutral-300 hover:shadow-lg hover:-translate-y-1 why-shin-card reveal reveal-d${i + 1}`}
+              className={`group relative rounded-2xl border border-neutral-200 bg-white p-8 transition-all duration-300 hover:border-neutral-300 hover:shadow-lg hover:-translate-y-1 why-shin-card reveal`}
             >
               <div className={`absolute inset-0 rounded-2xl bg-gradient-to-b ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
               <div className="relative z-10">
