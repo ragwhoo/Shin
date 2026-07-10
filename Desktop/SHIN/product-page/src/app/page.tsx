@@ -112,6 +112,7 @@ export default function Home() {
           logoAlt="SHIN"
           items={[
             { label: "Home", href: "/" },
+            { label: "Docs", href: "/docs" },
             { label: "GitHub", href: "https://github.com/anomalyco/shin", target: "_blank", rel: "noopener noreferrer" },
             { label: "npm", href: "https://www.npmjs.com/package/shin-engine", target: "_blank", rel: "noopener noreferrer" },
           ]}
@@ -347,7 +348,7 @@ export default function Home() {
           links: [
             { label: "Overview", href: "#" },
             { label: "Features", href: "#" },
-            { label: "Documentation", href: "#" },
+            { label: "Documentation", href: "/docs" },
           ],
         },
         {
