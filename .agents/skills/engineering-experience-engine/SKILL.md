@@ -236,6 +236,26 @@ If a session ends without submitting learnings after implementation:
 1. The plugin writes to `~/.agents/skills/engineering-experience-engine/pending-learn.yml`
 2. Next session: check the pending file via bash and submit learnings via curl
 
+## Browsing Existing Experiences
+
+To see all stored experiences (not concepts, but actual experience entries):
+
+```bash
+curl.exe -s http://localhost:8080/api/v1/experiences
+```
+
+Or PowerShell:
+```powershell
+Invoke-RestMethod -Uri http://localhost:8080/api/v1/experiences
+```
+
+Returns all `EXPERIENCE`-type nodes with id, title, tags, confidence, content, etc.
+
+For the full knowledge graph (all node types + edges):
+```bash
+curl.exe -s http://localhost:8080/api/v1/graph
+```
+
 ## Starting the Backend
 
 **Auto-start:** The plugin auto-starts the backend when you run `curl` to `/api/v1/review` or `/api/v1/learn`. You don't need to start it manually.

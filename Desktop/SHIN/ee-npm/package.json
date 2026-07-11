@@ -1,6 +1,6 @@
 {
   "name": "shin-engine",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Engineering Experience Engine — engineering judgment for AI coding agents",
   "bin": {
     "shin": "bin/ee.js"
@@ -16,5 +16,8 @@
     "knowledge",
     "brain"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "figlet": "^1.11.0"
+  }
 }
