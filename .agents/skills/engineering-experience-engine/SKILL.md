@@ -142,13 +142,20 @@ After review curl returns a judgment package:
 
 ### Step 1: Run Review
 
-Write a temp JSON file (using the write tool), then curl it:
+Use PowerShell (preferred — no quoting issues):
+
+```powershell
+$body = @{task="Describe what you are about to build or fix"} | ConvertTo-Json
+Invoke-RestMethod -Uri http://localhost:8080/api/v1/review -Method Post -Body $body -ContentType "application/json"
+```
+
+Or write a temp JSON file and curl it (works in any shell):
 
 ```bash
 curl.exe -s -X POST http://localhost:8080/api/v1/review -H "Content-Type: application/json" -d @%TEMP%\ee-review.json
 ```
 
-> **Important:** Use a temp file for the JSON payload (`-d @file.json`), never inline JSON with `-d '...'`. Inline JSON breaks with spaces, quotes, or special characters in the task description.
+> **Never use inline JSON** (`-d '{"task":"..."}'`) — it breaks with spaces, quotes, or special characters.
 
 ### Step 2: Display Judgment Package
 
@@ -203,13 +210,18 @@ Deployment Considerations
 
 After implementation completes, submit extracted knowledge via curl.
 
-Write a temp JSON file (using the write tool), then curl it:
+Use PowerShell (preferred):
+
+```powershell
+$body = @{type="experience"; title="Fixed db connection pool leak"; content="Added validation to HikariCP config"} | ConvertTo-Json
+Invoke-RestMethod -Uri http://localhost:8080/api/v1/learn -Method Post -Body $body -ContentType "application/json"
+```
+
+Or write a temp JSON file and curl it:
 
 ```bash
 curl.exe -s -X POST http://localhost:8080/api/v1/learn -H "Content-Type: application/json" -d @"%TEMP%\ee-learn.json"
 ```
-
-> **Important:** Use a temp file (`-d @file.json`) for the JSON payload, never inline JSON.
 
 Supported types: `experience`, `principle`, `failure`, `architecture`, `decision`.
 
