@@ -142,11 +142,13 @@ After review curl returns a judgment package:
 
 ### Step 1: Run Review
 
+Write a temp JSON file (using the write tool), then curl it:
+
 ```bash
-curl.exe -X POST http://localhost:8080/api/v1/review `
-  -H "Content-Type: application/json" `
-  -d '{"task":"Describe what you are about to build or fix"}'
+curl.exe -s -X POST http://localhost:8080/api/v1/review -H "Content-Type: application/json" -d @%TEMP%\ee-review.json
 ```
+
+> **Important:** Use a temp file for the JSON payload (`-d @file.json`), never inline JSON with `-d '...'`. Inline JSON breaks with spaces, quotes, or special characters in the task description.
 
 ### Step 2: Display Judgment Package
 
@@ -201,11 +203,13 @@ Deployment Considerations
 
 After implementation completes, submit extracted knowledge via curl.
 
+Write a temp JSON file (using the write tool), then curl it:
+
 ```bash
-curl.exe -X POST http://localhost:8080/api/v1/learn ^
-  -H "Content-Type: application/json" ^
-  -d "{\"type\":\"experience\",\"title\":\"Fixed db connection pool leak\",\"content\":\"Added connection validation and eviction interval to HikariCP config\",\"tags\":[\"database\",\"hikari\",\"pooling\"]}"
+curl.exe -s -X POST http://localhost:8080/api/v1/learn -H "Content-Type: application/json" -d @"%TEMP%\ee-learn.json"
 ```
+
+> **Important:** Use a temp file (`-d @file.json`) for the JSON payload, never inline JSON.
 
 Supported types: `experience`, `principle`, `failure`, `architecture`, `decision`.
 
