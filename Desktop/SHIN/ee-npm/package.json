@@ -1,6 +1,6 @@
 {
   "name": "shin-engine",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Engineering Experience Engine — engineering judgment for AI coding agents",
   "bin": {
     "shin": "bin/ee.js"
